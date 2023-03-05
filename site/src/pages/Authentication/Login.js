@@ -6,20 +6,19 @@ import { useNavigate } from 'react-router-dom';
 export function Login() {
   let navigate = useNavigate;
   const handleClickRegister = (values) => {
-    Axios.post("http://localhost:3030/usuarios", {
+    Axios.post("http://localhost:3030/usuario", {
       email: values.email,
       password: values.password
     }).then((response)=>{
        console.log(response);
-       navigate('/loja');
     })};
-  const handleClickLogin = (values) => console.log(values);
-
-
-
-
-  
-
+  const handleClickLogin = (values) => {
+    Axios.post("http://localhost:3030/login",{
+      email: values.email,
+      password: values.password
+    }).then((response)=>{
+        console.log(response);
+    })};
   const validationRegister = yup.object().shape({
     email: yup
     .string()
