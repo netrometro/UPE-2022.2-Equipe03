@@ -7,7 +7,6 @@ import axios from 'axios';
 
 
 export function Store(){
-
     const [user, setUser] = useState(null);
     useEffect(() => {
         axios.get('http://localhost:3030/usuario')

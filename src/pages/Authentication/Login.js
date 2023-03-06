@@ -14,6 +14,7 @@ export function Login() {
        if(response.data === "já existe usuário com essas credenciais"){
         alert("Usuário já existe")
        }
+       
     })};
   const handleClickLogin = (values) => {
     Axios.post("http://localhost:3030/login",{
@@ -21,7 +22,8 @@ export function Login() {
       password: values.password
     }).then((response)=>{
         console.log(response);
-        if(response.data === true){
+        if(response.data.result  === true){
+          localStorage.setItem('email', response.data.email);
           alert("Logado")
           navigate('/home')
 
