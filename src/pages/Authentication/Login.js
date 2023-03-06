@@ -11,6 +11,9 @@ export function Login() {
       password: values.password
     }).then((response)=>{
        console.log(response);
+       if(response.data === "já existe usuário com essas credenciais"){
+        alert("Usuário já existe")
+       }
     })};
   const handleClickLogin = (values) => {
     Axios.post("http://localhost:3030/login",{
@@ -20,7 +23,7 @@ export function Login() {
         console.log(response);
         if(response.data === true){
           alert("Logado")
-          navigate('/store')
+          navigate('/home')
 
         }
         else{
@@ -106,10 +109,6 @@ export function Login() {
             </div>
             <button className='button' type="submit">
               Logar
-            {/* <img 
-            src="https://cdn.discordapp.com/attachments/440326168491720705/1081051943813795861/image.png"
-            alt="ok" /> */}
-
             </button>
 
 
