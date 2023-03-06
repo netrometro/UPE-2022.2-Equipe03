@@ -4,13 +4,17 @@ import * as yup from "yup";
 import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
 export function Login() {
-  let navigate = useNavigate;
+  const navigate = useNavigate();
   const handleClickRegister = (values) => {
     Axios.post("http://localhost:3030/usuario", {
       email: values.email,
       password: values.password
     }).then((response)=>{
        console.log(response);
+       if(response.data === "já existe usuário com essas credenciais"){
+        alert("Usuário já existe")
+       }
+       
     })};
   const handleClickLogin = (values) => {
     Axios.post("http://localhost:3030/login",{
@@ -18,6 +22,15 @@ export function Login() {
       password: values.password
     }).then((response)=>{
         console.log(response);
+        if(response.data.result  === true){
+          localStorage.setItem('email', response.data.email);
+          alert("Logado")
+          navigate('/home')
+
+        }
+        else{
+          alert("Senha incorreta")
+        }
     })};
   const validationRegister = yup.object().shape({
     email: yup
@@ -98,10 +111,6 @@ export function Login() {
             </div>
             <button className='button' type="submit">
               Logar
-            {/* <img 
-            src="https://cdn.discordapp.com/attachments/440326168491720705/1081051943813795861/image.png"
-            alt="ok" /> */}
-
             </button>
 
 
