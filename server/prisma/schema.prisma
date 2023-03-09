@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//Qual bd eu tô usando ( como to usando postgres
+// tem que olhar o .env, lá tem a variavel DATABASE_URL declarando o url do bd)
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//Atualizar/Adicionar novas tabelas => yarn prisma migrate dev
+model usuario {
+  userId     Int         @id @default(autoincrement())
+  email      String      @unique
+  name       String?
+  created_at DateTime    @default(now())
+  password   String
+}
+
+
