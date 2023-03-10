@@ -5,6 +5,7 @@ import './Style.css';
 export function Trade(){
     return(
         <div>
+        <Navbar />
 
         </div>
     )

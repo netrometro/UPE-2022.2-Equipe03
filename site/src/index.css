@@ -1,0 +1,83 @@
+.nav-bar li {
+    display:inline-block;
+    margin-right: 20px;
+  }
+
+  .nav-bar li a:link,
+  .nav-bar li a:visited {
+    text-transform: uppercase;
+    text-decoration:none;
+    color:#FF5112;
+    font-size:90%;
+    transition: 1px solid transparent;
+  }
+
+  .nav-bar li a:hover,
+  .nav-bar li a:active {
+    border-bottom : 2px solid  #FF5112;
+    padding: 10px 0;
+    color: #70b0b0;
+  }
+
+  header {
+    display: flex;
+    align-items: top;
+    font-family: cursive;
+    padding: 20px 50px;
+    justify-content: space-between;
+    background-size:cover;
+    height:10%;
+    width: 90%;
+  }
+
+  .card-grid {
+    position: relative;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+
+  }
+  
+  .card {
+    position: relative;
+  }
+  
+  .card img {
+    margin: 15px;
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+  }
+  
+  .card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .card p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .card button {
+    cursor:pointer;
+    position: relative;
+    align-self: center;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px;
+    width: 50%;
+    padding: 0.5rem;
+    background-color: #70B0B0;
+    color: #fff;
+    border: none;
+    outline: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .card:hover button {
+    opacity: 1;
+  }
+

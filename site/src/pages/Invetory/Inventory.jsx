@@ -4,6 +4,11 @@ import CardGridInv from '../Components/CardGridInv';
 export function Inventory() {
   return (
     <div>
+      <Navbar />
+      <CardGridInv/>
+      <div>
+      
+      </div>
 
     </div>
   );
