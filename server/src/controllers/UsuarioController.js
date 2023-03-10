@@ -156,4 +156,22 @@ export default {
       return res.json({ error });
     }
   },
+  async findMoney(req, res) {
+    try {
+      const { userId } = req.params;
+
+      const usuario = await prisma.usuario.findUnique({
+        where: { userId: Number(userId) },
+        select: { money: true },
+      });
+
+      if (!usuario) {
+        return res.json({ error: "usuario não encontrado" });
+      }
+
+      return res.json(usuario);
+    } catch (error) {
+      return res.json({ error });
+    }
+  },
 };
