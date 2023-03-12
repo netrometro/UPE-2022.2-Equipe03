@@ -28,17 +28,18 @@ export default {
       });
 
       const createInv = async (userId) => {
-        const inv = await prisma.inventario.create({data: {userId: Number(userId),},});
+        const invent = await prisma.inventario.create({data: {userId: Number(userId),},});
       
-        return inv;
+        return invent;
       };
 
       const id = usuario.userId
-      const invent = createInv(id)
+      const inv = createInv(id)
+
 
       usuario = await prisma.usuario.update({
         where: { userId: Number(id) },
-        data: {invent},
+        data: {inv},
       });
 
       const token = jwt.sign(

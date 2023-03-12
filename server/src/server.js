@@ -3,6 +3,7 @@ import express from "express";
 import { usuarioRouter } from "./allRoutes/usuarioRoutes";
 import { inventarioRouter } from "./allRoutes/invRoutes";
 import { gatRouter } from "./allRoutes/gatRoutes";
+import {albumRouter} from "./allRoutes/albumRoutes";
 const cors = require('cors');
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(usuarioRouter);
 app.use(inventarioRouter)
 app.use(gatRouter)
+app.use(albumRouter)
 
 app.listen(3030, () => console.log("Serve está rodando na porta 3030🚀"));
 
