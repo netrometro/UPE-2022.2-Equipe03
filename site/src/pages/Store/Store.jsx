@@ -7,13 +7,12 @@ import axios from 'axios';
 
 
 export function Store(){
-    const invId = localStorage.getItem('invId');
+    const userId = localStorage.getItem('userId');
     const [user, setUser] = useState(null);
     useEffect(() => {
-        axios.get('http://localhost:3030/usuario/'+ invId + '/money')
+        axios.get('http://localhost:3030/usuario/'+ userId + '/money')
           .then(response => {
             setUser(response.data);
-            
             
             
 
@@ -21,7 +20,7 @@ export function Store(){
           .catch(error => {
             console.log(error);
           });
-      }, [invId]);
+      }, [userId]);
 
     return(
         <>

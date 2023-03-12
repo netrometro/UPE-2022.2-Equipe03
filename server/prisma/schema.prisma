@@ -22,6 +22,7 @@ model usuario {
   password   String
   money      Int         @default(0)
   inv        inventario?
+  album album?
 }
 
 model gaturinha {
@@ -36,15 +37,24 @@ model gaturinha {
 
 model gaturinha_product {
   prodId Int        @id @default(autoincrement())
-  gat    gaturinha  @relation(fields: [gatId], references: [gatId])
+  gat    gaturinha  @relation(fields: [gatId], references: [gatId], onDelete: Cascade, onUpdate: Cascade)
   gatId  Int
-  inv    inventario @relation(fields: [invId], references: [invId])
-  invId  Int
+  inv    inventario? @relation(fields: [invId], references: [invId])
+  invId  Int?
+  album    album? @relation(fields: [albumId], references: [albumId])
+  albumId  Int?
 }
 
 model inventario {
   invId    Int                 @id @default(autoincrement())
-  user     usuario             @relation(fields: [userId], references: [userId])
+  user     usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
+  userId   Int                 @unique
+  gat_prod gaturinha_product[]
+}
+
+model album {
+  albumId Int @id @default(autoincrement())
+  user     usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
   userId   Int                 @unique
   gat_prod gaturinha_product[]
 }
