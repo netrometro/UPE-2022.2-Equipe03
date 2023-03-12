@@ -3,9 +3,6 @@ import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as yup from "yup";
 import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
-const email = localStorage.getItem('email');
-const userId = localStorage.getItem('userId');
-const invId = localStorage.getItem('invId');
 export function Login() {
   const navigate = useNavigate();
   const handleClickRegister = (values) => {
@@ -14,39 +11,34 @@ export function Login() {
       password: values.password
     }).then((response)=>{
        console.log(response);
-       if(response.data === "já existe usuário com essas credenciais"){
+       if(response.data.error === ("já existe usuário com essas credenciais")){
         alert("Usuário já existe")
+       } 
+       else {
+        alert("Conta registrada")
        }
        
     })};
   const handleClickLogin = (values) => {
-    Axios.post("http://localhost:3030/login",{
+    Axios.post('http://localhost:3030/login', {
       email: values.email,
-      password: values.password
-    }).then((response)=>{
-        console.log(response);
-        if(response.data.result  === true){
-          localStorage.setItem('email', response.data.email);
-          localStorage.setItem('userId', response.data.userId)
-          localStorage.setItem('invId', response.data.invId)
-          console.log(email);
-          console.log(userId);
-          console.log(invId);
-
-
-          
-
-          alert("Logado")
-          navigate('/home')
-
-        }
-        else if(response.data.error === "usuário não encontrado"){
-          alert("Usuário não encontrado")
-        }
-        else{
-          alert("Senha incorreta")
-        }
-    })};
+      password: values.password,
+    }).then((response) => {
+      console.log(response);
+      if (response.data.result === true) {
+        localStorage.setItem('email', response.data.email);
+        localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('invId', response.data.invId);
+        alert('Logado');
+        navigate('/home');
+        window.location.reload();
+      } else if (response.data.error === 'Usuário não encontrado') {
+        alert('Usuário não encontrado');
+      } else {
+        alert('Senha incorreta');
+      }
+    });
+  };
   const validationRegister = yup.object().shape({
     email: yup
     .string()

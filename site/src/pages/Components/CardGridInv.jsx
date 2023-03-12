@@ -8,10 +8,12 @@ const CardGridInv = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
+    console.log("Fetching cards...");
     Axios
       .get("http://localhost:3030/inventario/"+invId)
       .then((response) => {
         setCards(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -20,8 +22,8 @@ const CardGridInv = () => {
 
   return (
     <div className="card-grid">
-      {cards.map((card) => (
-        <Card key={card.id} {...card} />
+      {Array.isArray(cards) && cards.map((card) => (
+        <Card gatId={card.gatId} image={card.image} name={card.name} price={card.price} />
       ))}
     </div>
   );

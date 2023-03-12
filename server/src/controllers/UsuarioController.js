@@ -89,7 +89,7 @@ export default {
 
       res.json({ result: comparaSenha, email: email, userId: usuario.userId, invId: invId.invId});
     } catch (error) {
-      return res.json({ error: "erro ao fazer login" });
+      return res.json({ error: "Usuário não encontrado" });
     }
   },
 

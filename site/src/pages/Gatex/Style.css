@@ -1,0 +1,21 @@
+.search-bar{
+    text-align: center;
+    
+    
+}
+
+.search-bar input{
+    text-align:center;
+    font-family: 'Itim', cursive;    
+    outline-width: 0;
+    border: none;
+    color: gray;
+    background-color: #EFEBEB;
+    border-radius: 50px;
+    padding: 3px;
+    width: 30%;
+    height: 30px;
+    margin: 5%;
+    font-weight: bold;
+
+}

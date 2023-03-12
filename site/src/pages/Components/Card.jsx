@@ -14,16 +14,27 @@ const Card = ({gatId, image, name, price}) => {
           email: email
         })
         .then(response => {
-          console.log(response.data);
+          if (response.data === false){ 
+            alert("Você não tem dinheiro suficiente para comprar essa figurinha")
+          }
+          else{
+            alert("Compra realizada")
+          }
+          console.log(response.data)
+          window.location.reload();
+          
         })
         .catch(error => {
           console.log(error);
+          alert("Ocorreu um erro ao realizar a compra");
         });
       };
     return(
         <div className="card">
+            
             <img src={image} alt = {name}/>
             <h3>{name}</h3>
+            <h4>{gatId}</h4>
             <p>{price}</p>
             <button onClick={handleBuy}>Buy</button>
         </div>
