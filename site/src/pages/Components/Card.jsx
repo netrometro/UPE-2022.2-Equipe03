@@ -34,7 +34,6 @@ const Card = ({gatId, image, name, price}) => {
             
             <img src={image} alt = {name}/>
             <h3>{name}</h3>
-            <h4>{gatId}</h4>
             <p>{price}</p>
             <button onClick={handleBuy}>Buy</button>
         </div>
