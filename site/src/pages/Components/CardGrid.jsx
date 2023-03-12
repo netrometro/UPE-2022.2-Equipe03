@@ -28,54 +28,11 @@ const cards = [
       image: "https://cdn.discordapp.com/attachments/440326168491720705/1082052911061798943/123.png"
     },
     {
-      gatId: 4,
+      gatId: 5,
       name: "Gatinho 5",
       price: 50,
       image: "https://cdn.discordapp.com/attachments/440326168491720705/1082053180835241994/image.png"
     },
-    {
-      gatId: 4,
-      name: "Gatinho 5",
-      price: 50,
-      image: "https://cdn.discordapp.com/attachments/440326168491720705/1082053180835241994/image.png"
-    },
-    {
-      gatId: 4,
-      name: "Gatinho 5",
-      price: 50,
-      image: "https://cdn.discordapp.com/attachments/440326168491720705/1082053180835241994/image.png"
-    }
-    ,
-    {
-      gatId: 4,
-      name: "Gatinho 5",
-      price: 50,
-      image: "https://cdn.discordapp.com/attachments/440326168491720705/1082053180835241994/image.png"
-    },
-    {
-      gatId: 4,
-      name: "Gatinho 5",
-      price: 50,
-      image: "https://cdn.discordapp.com/attachments/440326168491720705/1082053180835241994/image.png"
-    },
-    {
-      gatId: 4,
-      name: "Gatinho 5",
-      price: 50,
-      image: "https://cdn.discordapp.com/attachments/440326168491720705/1082053180835241994/image.png"
-    },
-    {
-      gatId: 4,
-      name: "Gatinho 5",
-      price: 50,
-      image: "https://cdn.discordapp.com/attachments/440326168491720705/1082053180835241994/image.png"
-    },
-    {
-      gatId: 4,
-      name: "Gatinho 5",
-      price: 50,
-      image: "https://cdn.discordapp.com/attachments/440326168491720705/1082053180835241994/image.png"
-    }
 
 ];
 

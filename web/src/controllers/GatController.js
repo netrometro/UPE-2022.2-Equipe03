@@ -43,7 +43,7 @@ export default {
       let usuario = await prisma.usuario.findUnique({ where: { email } });
   
       if (value.price > usuario.money) {
-        return res.json({ msg: "não foi possível realizar a compra" });
+        return res.json(false);
       }
   
       const createGatProd = async (gatId, invId) => {
@@ -66,7 +66,7 @@ export default {
         data: { money: newMoney },
       });
   
-      res.json({ msg: "compra realizada com sucesso"});
+      res.json(true);
     } catch (error) {
       console.error(error); 
       return res.status(500).json({ error: "Erro interno do servidor" });

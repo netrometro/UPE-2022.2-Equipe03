@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import '../../index.css';
 import Logout from './Logout';
+
 export const Navbar = () => {
     return (
         <header>
