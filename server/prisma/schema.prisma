@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//Qual bd eu tô usando ( como to usando postgres
+// tem que olhar o .env, lá tem a variavel DATABASE_URL declarando o url do bd)
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//Atualizar/Adicionar novas tabelas => yarn prisma migrate dev
+model usuario {
+  userId     Int         @id @default(autoincrement())
+  email      String      @unique
+  name       String?
+  created_at DateTime    @default(now())
+  password   String
+  money      Int         @default(0)
+  inv        inventario?
+  album      album?
+  click      DateTime?
+}
+
+model gaturinha {
+  gatId     Int                 @id @default(autoincrement())
+  name      String
+  image     String              @unique
+  release   DateTime            @default(now())
+  price     Int
+  type      String
+  gatProdEx gaturinha_product[]
+}
+
+model gaturinha_product {
+  prodId Int        @id @default(autoincrement())
+  gat    gaturinha  @relation(fields: [gatId], references: [gatId], onDelete: Cascade, onUpdate: Cascade)
+  gatId  Int
+  inv    inventario? @relation(fields: [invId], references: [invId])
+  invId  Int?
+  album    album? @relation(fields: [albumId], references: [albumId])
+  albumId  Int?
+}
+
+model inventario {
+  invId    Int                 @id @default(autoincrement())
+  user     usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
+  userId   Int                 @unique
+  gat_prod gaturinha_product[]
+}
+
+model album {
+  albumId Int @id @default(autoincrement())
+  user     usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
+  userId   Int                 @unique
+  gat_prod gaturinha_product[]
+}
