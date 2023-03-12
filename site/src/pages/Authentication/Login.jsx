@@ -27,7 +27,6 @@ export function Login() {
         console.log(response);
         if(response.data.result  === true){
           localStorage.setItem('email', response.data.email);
-          //FIX ME: userId está retornando como null. 
           localStorage.setItem('userId', response.data.userId)
           localStorage.setItem('invId', response.data.invId)
           console.log(email);
