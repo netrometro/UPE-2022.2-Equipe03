@@ -9,30 +9,12 @@ export function Home() {
       <div class="main-img">
             <img src="https://media.discordapp.net/attachments/1081023068358590586/1081023227842801704/logo-removebg-preview.png" alt="Gaturinhas" draggable="false"></img>
         </div>
-        //botão de moedas diário
-        <button id="mybutton" value="10">Collect your daily coins</button>
-    </div>
-    </div>
-  );
-}
 
-import './Style.css';
-import Navbar from '../Components/Navbar';
-export function Home() {
-  return (
-    <div>
-      <Navbar />
-      <div className='container'>
-      <div class="main-img">
-            <img src="https://media.discordapp.net/attachments/1081023068358590586/1081023227842801704/logo-removebg-preview.png" alt="Gaturinhas" draggable="false"></img>
-        </div>
-        //botão de moedas diário
         <button id="mybutton" onClick={updateMoney}>Collect your daily coins</button>
     </div>
     </div>
   );
 }
-
 const button = document.querySelector('#mybutton');
     let sec = 86400;
     let countdown = null;

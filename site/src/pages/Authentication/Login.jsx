@@ -2,17 +2,43 @@ import './Style.css';
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as yup from "yup";
 import Axios from "axios";
-function Login() {
-
+import { useNavigate } from 'react-router-dom';
+export function Login() {
+  const navigate = useNavigate();
   const handleClickRegister = (values) => {
-    Axios.post("http://localhost:3030/usuarios", {
+    Axios.post("http://localhost:3030/usuario", {
       email: values.email,
       password: values.password
     }).then((response)=>{
        console.log(response);
+       if(response.data.error === ("já existe usuário com essas credenciais")){
+        alert("Usuário já existe")
+       } 
+       else {
+        alert("Conta registrada")
+       }
+       
     })};
-  const handleClickLogin = (values) => console.log(values);
-
+  const handleClickLogin = (values) => {
+    Axios.post('http://localhost:3030/login', {
+      email: values.email,
+      password: values.password,
+    }).then((response) => {
+      console.log(response);
+      if (response.data.result === true) {
+        localStorage.setItem('email', response.data.email);
+        localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('invId', response.data.invId);
+        alert('Logado');
+        navigate('/home');
+        window.location.reload();
+      } else if (response.data.error === 'Usuário não encontrado') {
+        alert('Usuário não encontrado');
+      } else {
+        alert('Senha incorreta');
+      }
+    });
+  };
   const validationRegister = yup.object().shape({
     email: yup
     .string()
@@ -42,7 +68,7 @@ function Login() {
     .required("Este campo é obrigatório"),
 
   });
-
+  
   return (
     <div className="container">
       <div className="login-logo"> <img
@@ -81,7 +107,7 @@ function Login() {
           </div>
 
           <div className='login-form-group'>
-               <Field name ="password" className="form-field" 
+               <Field type = "password" name ="password" className="form-field" 
                placeHolder="Senha"/>
                
                 <ErrorMessage
@@ -92,10 +118,6 @@ function Login() {
             </div>
             <button className='button' type="submit">
               Logar
-            {/* <img 
-            src="https://cdn.discordapp.com/attachments/440326168491720705/1081051943813795861/image.png"
-            alt="ok" /> */}
-
             </button>
 
 
