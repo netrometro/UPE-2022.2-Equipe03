@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Components/Navbar';
 import './Style.css';
 import Axios from "axios";
-import Card from '../Components/Card'
+import Card from '../Components/CardGatex'
 
 
 
 const Gatex = () => {
     const [cards, setCards] = useState([]);
     const [searchTerm, setSearchTerm] = useState('')
+    
   
     useEffect(() => {
       console.log("Fetching cards...");
@@ -23,11 +24,13 @@ const Gatex = () => {
         });
     }, []);
 
-    const filteredCards = cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase()))
-  
+    const filteredCards = cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase())
+      || card.type.toLowerCase().includes(searchTerm.toLowerCase()))
+   
     return (
       <div>
         <Navbar/>
+
         <div className='search-bar'>
                 <input 
                 type="text" 
@@ -38,7 +41,7 @@ const Gatex = () => {
                  />
                 <div className='card-grid'>
                     {filteredCards.map((card) => (
-                        <Card gatId={card.gatId} image={card.image} name={card.name} price={card.price}/>
+                        <Card gatId={card.gatId} image={card.image} name={card.name} type={card.type}/>
                     )   
                     )}
                 </div>
