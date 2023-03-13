@@ -36,9 +36,9 @@ const Gatex = () => {
         
         const rarityOrder ={ 'Common': 1, 'Rare':2, 'Epic': 3, 'Legendary': 4 };
         if (sortDirection === 'asc'){
-          return rarityOrder[a.rarity] - rarityOrder[b.rarity];
+          return rarityOrder[a.type] - rarityOrder[b.type];
         } else{
-          return rarityOrder[b.rarity] - rarityOrder[a.rarity];
+          return rarityOrder[b.type] - rarityOrder[a.type];
         }
       } else{
         if(sortDirection === 'asc'){
