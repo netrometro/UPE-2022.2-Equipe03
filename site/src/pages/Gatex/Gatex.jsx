@@ -9,6 +9,9 @@ import Card from '../Components/CardGatex'
 const Gatex = () => {
     const [cards, setCards] = useState([]);
     const [searchTerm, setSearchTerm] = useState('')
+    const [sortOrder, setSortOrder] = useState('name');
+    const [sortDirection, setSortDirection] = useState('asc');
+
     
   
     useEffect(() => {
@@ -27,10 +30,40 @@ const Gatex = () => {
     const filteredCards = cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase())
       || card.type.toLowerCase().includes(searchTerm.toLowerCase()))
    
+
+    const sortedCards = filteredCards.sort((a, b)=> {
+      if(sortOrder === 'Rarity') {
+        
+        const rarityOrder ={ 'Common': 1, 'Rare':2, 'Epic': 3, 'Legendary': 4 };
+        if (sortDirection === 'asc'){
+          return rarityOrder[a.rarity] - rarityOrder[b.rarity];
+        } else{
+          return rarityOrder[b.rarity] - rarityOrder[a.rarity];
+        }
+      } else{
+        if(sortDirection === 'asc'){
+          return a.name.localeCompare(b.name);
+        }else{
+          return b.name.localeCompare(a.name);
+        }
+      }
+    })
     return (
       <div>
         <Navbar/>
-
+        <div>
+            <label>
+              Sort by:
+              <select value={sortOrder} onChange={event => setSortOrder(event.target.value)}>
+                            <option value="Rarity">Rarity</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={sortDirection === 'desc'} onChange={event => setSortDirection(event.target.checked ? 'desc' : 'asc')} />
+                        Reverse order
+                    </label>
+          </div>
         <div className='search-bar'>
                 <input 
                 type="text" 
@@ -40,7 +73,7 @@ const Gatex = () => {
                  }}
                  />
                 <div className='card-grid'>
-                    {filteredCards.map((card) => (
+                    {sortedCards.map((card) => (
                         <Card gatId={card.gatId} image={card.image} name={card.name} type={card.type}/>
                     )   
                     )}
