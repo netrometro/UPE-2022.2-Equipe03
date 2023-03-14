@@ -5,7 +5,8 @@ import AlbumController from "../controllers/AlbumController";
 const albumRouter = Router();
 
 
-albumRouter.post("/album/:albumId", AlbumController.findAlbum);
+albumRouter.get("/album/:userId", AlbumController.findAlbum);
+albumRouter.post("/album/create", AlbumController.createAlbum);
 
 
 export { albumRouter };

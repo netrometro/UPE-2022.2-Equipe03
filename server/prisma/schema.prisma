@@ -42,7 +42,7 @@ model gaturinha_product {
   gatId  Int
   inv    inventario? @relation(fields: [invId], references: [invId])
   invId  Int?
-  album    album? @relation(fields: [albumId], references: [albumId])
+  album    album? @relation(fields: [albumId], references: [albumId], onDelete: Cascade, onUpdate: Cascade)
   albumId  Int?
 }
 

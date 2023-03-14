@@ -15,7 +15,7 @@ export function Login() {
         alert("Usuário já existe")
        } 
        else {
-        alert("Conta registrada")
+        alert("Cadastrado!")
        }
        
     })};
