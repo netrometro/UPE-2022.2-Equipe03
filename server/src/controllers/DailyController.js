@@ -7,25 +7,7 @@ export default{
     async updateMoney(req, res){
         try{
             const {userId} = req.params;
-
-            //conferir click
-            const {verifyClick} = await prisma.usuario.findUnique({
-                where:{
-                    click: (click),
-                },
-
-            })
-
-            //check hour
-            const {checkhour} = await prisma.usuario.findUnique({
-                if(click){
-                    
-                }
-
-            })
-            
             //update money
-
             const updateMoney = await prisma.usuario.update({
                 where: {
                     userId: Number(userId),
