@@ -33,7 +33,7 @@
   .cardGatex {
     position: relative;
     width: 300px;
-    height: 300px;
+    height: 350px;
     background-color: #CBD6C8;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -65,7 +65,7 @@
     width: 95%;
     height: 95%;
     padding: 5px;
-    background-color: #CBD6C8;
+    background-color: transparent;
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     justify-content: center;
@@ -93,7 +93,7 @@
     font-family: 'Itim', cursive ;
     display: flex;
     align-items: center;
-    color: #FF5112;
+    color: #ffffff;
   }
   
   .cardGatex button {
