@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-
+import '../../index.css';
 const Card = ({gatId, image, name, price}) => {
     const email = localStorage.getItem('email');
     const handleBuy = () => {

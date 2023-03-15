@@ -22,12 +22,13 @@
   header {
     display: flex;
     align-items: top;
-    font-family: cursive;
+    font-family: 'itim', cursive;
     padding: 20px 50px;
     justify-content: space-between;
     background-size:cover;
     height:10%;
     width: 90%;
+    font-weight: bold;
   }
 
   .card-grid {
@@ -41,6 +42,7 @@
   
   .card {
     position: relative;
+    
   }
   
   .card img {
@@ -96,5 +98,5 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px;
-    width: 50px;
+    width: 75px;
   }

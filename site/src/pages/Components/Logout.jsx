@@ -18,7 +18,7 @@ export function Logout() {
     }
     return (
       <div>
-        <button className='button2' onClick={sair}>Sair</button>
+        <button className='button2' onClick={sair}>Logout</button>
       </div>
     )
 }

@@ -19,3 +19,106 @@
     font-weight: bold;
 
 }
+
+ .card-grid {
+    display: flex;
+    position: relative;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    margin-inline-start: 50px;
+  }
+  
+  .cardGatex {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-color: #CBD6C8;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: background-color 0.2s ease-in-out;
+    justify-content: space-between;
+  }
+  .cardGatex:hover {
+    background-color: #CBD6C8;
+  }
+  
+  .cardGatex img {
+    margin: 15px;
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+  }
+  .cardGatex:hover img {
+    opacity: 0;
+  }
+  .cardGatex::before {
+    content: attr(data-description);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 95%;
+    padding: 5px;
+    background-color: #CBD6C8;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    justify-content: center;
+  }
+  
+  .cardGatex:hover::before {
+    opacity: 1;
+  }
+  
+  .cardGatex h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-family: cursive;
+  }
+  
+  .cardGatex p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .cardGatex[data-description]::before {
+    content: attr(data-description);
+    font-size: large;
+    font-weight: bold;
+    font-family: 'Itim', cursive ;
+    display: flex;
+    align-items: center;
+    color: #FF5112;
+  }
+  
+  .cardGatex button {
+    cursor:pointer;
+    position: relative;
+    align-self: center;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px;
+    width: 50%;
+    padding: 0.5rem;
+    background-color: #70B0B0;
+    color: #fff;
+    border: none;
+    outline: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .cardGatex:hover button {
+    opacity: 1;
+  }
+
+.cardGatex h4{
+    font-family: cursive;
+    margin: 1px;
+
+}

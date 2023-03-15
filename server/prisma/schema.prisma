@@ -32,6 +32,7 @@ model gaturinha {
   release   DateTime            @default(now())
   price     Int
   type      String
+  desc      String              
   gatProdEx gaturinha_product[]
 }
 
