@@ -78,6 +78,7 @@
   .cardGatex h3 {
     margin: 0;
     font-size: 1.2rem;
+    font-family: cursive;
   }
   
   .cardGatex p {
@@ -115,3 +116,9 @@
   .cardGatex:hover button {
     opacity: 1;
   }
+
+.cardGatex h4{
+    font-family: cursive;
+    margin: 1px;
+
+}

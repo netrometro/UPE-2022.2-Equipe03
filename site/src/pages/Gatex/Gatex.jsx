@@ -61,7 +61,7 @@ const Gatex = () => {
                     </label>
                     <label>
                         <input type="checkbox" checked={sortDirection === 'desc'} onChange={event => setSortDirection(event.target.checked ? 'desc' : 'asc')} />
-                        Reverse order
+                        Reverse
                     </label>
           </div>
         <div className='search-bar'>
