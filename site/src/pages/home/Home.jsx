@@ -8,7 +8,6 @@ export function Home() {
       <DailyButton />
       <div className='container'>
         
-
       </div>
 
     </div>

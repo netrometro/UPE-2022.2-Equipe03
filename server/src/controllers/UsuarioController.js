@@ -117,7 +117,7 @@ export default {
   async updateUsuario(req, res) {
     try {
       const { userId } = req.params;
-      const { name, email, password, money } = req.body;
+      const { name, email, password} = req.body;
 
       let usuario = await prisma.usuario.findUnique({
         where: { userId: Number(userId) },
@@ -129,7 +129,7 @@ export default {
 
       usuario = await prisma.usuario.update({
         where: { userId: Number(userId) },
-        data: { name, email, password, money },
+        data: { name, email, password},
       });
 
       return res.json(usuario);

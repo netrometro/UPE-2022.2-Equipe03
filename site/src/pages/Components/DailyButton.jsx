@@ -1,22 +1,25 @@
 import React from "react";
 import Axios from "axios";
-import {update} from "react-router-dom";
 
 
 
-const Button = () => {
-    const userId = localStorage.getItem('userId');
-    const DailyButton = () =>{
-        if (!userId){
+export function Button() {
 
-        }
-        Axios.update("http://localhost:3030/daily", {
-            money: 10
-        })
-
+  const handleCollectReward = () => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      return;
     }
-    return(
-        <button onClick={DailyButton}>Collect your daily coins</button>
-    );
+    Axios.put('http://localhost:3030/daily/'+ userId, { money: 10 })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
+  return <button onClick={handleCollectReward}>Collect your daily coins</button>;
 }
+
+export default Button;

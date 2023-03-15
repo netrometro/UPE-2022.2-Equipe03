@@ -3,6 +3,6 @@ import DailyController from "../controllers/DailyController";
 
 const dailyRouter = Router();
 
-dailyRouter.update("/daily", DailyController.updateMoney);
+dailyRouter.put("/daily/:userId", DailyController.updateMoney);
 
 export {dailyRouter};
