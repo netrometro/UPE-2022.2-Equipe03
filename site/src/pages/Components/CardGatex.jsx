@@ -1,8 +1,8 @@
 import React from "react";
 
-const CardGatex = ({gatId, image, name, price, type}) => {
+const CardGatex = ({image, name, type, desc}) => {
     return(
-        <div className="card">
+        <div className="cardGatex" data-description={desc}>
             
             <img src={image} alt = {name}/>
             <h3>{name}</h3>

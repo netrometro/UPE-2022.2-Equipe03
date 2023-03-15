@@ -34,7 +34,7 @@ const Gatex = () => {
     const sortedCards = filteredCards.sort((a, b)=> {
       if(sortOrder === 'Rarity') {
         
-        const rarityOrder ={ 'Common': 1, 'Rare':2, 'Epic': 3, 'Legendary': 4 };
+        const rarityOrder ={ 'Common': 4, 'Rare':3, 'Epic': 2, 'Legendary': 1 };
         if (sortDirection === 'asc'){
           return rarityOrder[a.type] - rarityOrder[b.type];
         } else{
@@ -72,13 +72,13 @@ const Gatex = () => {
                  {setSearchTerm(event.target.value)
                  }}
                  />
+                 </div>
                 <div className='card-grid'>
                     {sortedCards.map((card) => (
-                        <Card gatId={card.gatId} image={card.image} name={card.name} type={card.type}/>
+                        <Card gatId={card.gatId} image={card.image} name={card.name} type={card.type} desc={card.desc}/>
                     )   
                     )}
                 </div>
-        </div>
       </div>
     );
   };  
