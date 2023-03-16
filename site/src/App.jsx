@@ -6,7 +6,7 @@ import Store from './pages/Store/Store';
 import Home from './pages/Home/Home';
 import Inventory from './pages/Invetory/Inventory';
 import Trade from './pages/Trade/Trade'
-import Settings from './pages/Settings/settings';
+import Cemitery from './pages/Cemitery/cemitery';
 import Gatex from  './pages/Gatex/Gatex'
 import Album from './pages/Album/Album';
 function App() {
@@ -19,7 +19,7 @@ function App() {
       <Route path='/inventory' element={<Inventory/>}></Route>
       <Route path='/album' element={<Album/>}></Route>
       <Route path='/trade' element={<Trade/>}></Route>
-      <Route path='/settings' element={<Settings/>}></Route>
+      <Route path='/cemitery' element={<Cemitery/>}></Route>
       <Route path='/gatex' element={<Gatex/>}></Route>
      
     

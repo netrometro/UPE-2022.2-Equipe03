@@ -25,7 +25,10 @@ export function Button() {
       });
   };
 
-  return <button disabled={disabled} onClick={handleCollectReward}>Collect your daily coins</button>;
+  return (<div className="dailyButton"><button disabled={disabled} 
+    onClick={handleCollectReward}>
+      Collect your daily coins
+    </button></div>);
 }
 
 export default Button;
