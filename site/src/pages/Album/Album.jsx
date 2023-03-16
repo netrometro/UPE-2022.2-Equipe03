@@ -2,7 +2,7 @@ import './Style.css';
 import Navbar from '../Components/Navbar';
 import CardGridAlbum from '../Components/CardGridAlbum';
 import CreateAlbumButton from '../Components/CreateAlbumButton';
-
+import React from 'react';
 
 export function Album() {
  
