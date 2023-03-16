@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState}from "react";
 import Axios from "axios";
 
 
 
 export function Button() {
 
+  const [disabled, setDisabled] = useState(false);
   const handleCollectReward = () => {
     const userId = localStorage.getItem("userId");
     if (!userId) {
@@ -13,13 +14,18 @@ export function Button() {
     Axios.put('http://localhost:3030/daily/'+ userId, { money: 10 })
       .then((response) => {
         console.log(response);
+        alert('coins obtained');
+        setDisabled(true);
+        
+        
+
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  return <button onClick={handleCollectReward}>Collect your daily coins</button>;
+  return <button disabled={disabled} onClick={handleCollectReward}>Collect your daily coins</button>;
 }
 
 export default Button;

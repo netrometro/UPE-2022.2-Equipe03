@@ -5,8 +5,8 @@ export function Home() {
   return (
     <div>
       <Navbar />
-      <DailyButton />
       <div className='container'>
+      <DailyButton />
         
       </div>
 

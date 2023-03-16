@@ -19,7 +19,7 @@ export default {
 
       usuario = await prisma.usuario.update({
         where: { userId: Number(userId) },
-        data: { money: {increment: usuario.money + Number(money)}},
+        data: { money: {increment: Number(money)}},
       });
 
       return res.json(usuario);
