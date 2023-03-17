@@ -55,4 +55,37 @@ export default {
           return res.json({ error });
         }
       },  
+      async findInv(req, res) {
+        try {
+          const { invId } = req.params;
+    
+          const inventario = await prisma.inventario.findUnique({
+            where: { invId: Number(invId) },
+            include: {
+              pac_product: {
+                include: {
+                  pacotefig: {
+                    select: {
+                      pacId: true,
+                      name: true,
+                      image: true,
+                      price: true
+                    }
+                  }
+                }
+              }
+            }
+          });
+    
+          if (!inventario) {
+            return res.json({ error: "inventario não encontrado" });
+          }
+    
+          const pacotinho = inventario.pac_product.map((pp) => pp.pacotefig);
+    
+          return res.json(pacotinho);
+        } catch (error) {
+          return res.json({ error });
+        }
+      },
     };
