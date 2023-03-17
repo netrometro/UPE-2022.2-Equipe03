@@ -33,29 +33,52 @@ model gaturinha {
   release   DateTime            @default(now())
   price     Int
   type      String
-  desc      String              
+  desc      String
   gatProdEx gaturinha_product[]
 }
 
 model gaturinha_product {
-  prodId Int        @id @default(autoincrement())
-  gat    gaturinha  @relation(fields: [gatId], references: [gatId], onDelete: Cascade, onUpdate: Cascade)
-  gatId  Int
-  inv    inventario? @relation(fields: [invId], references: [invId])
-  invId  Int?
-  album    album? @relation(fields: [albumId], references: [albumId], onDelete: Cascade, onUpdate: Cascade)
-  albumId  Int?
+  prodId  Int         @id @default(autoincrement())
+  gat     gaturinha   @relation(fields: [gatId], references: [gatId], onDelete: Cascade, onUpdate: Cascade)
+  gatId   Int
+  inv     inventario? @relation(fields: [invId], references: [invId])
+  invId   Int?
+  album   album?      @relation(fields: [albumId], references: [albumId], onDelete: Cascade, onUpdate: Cascade)
+  albumId Int?
+}
+
+model pacotefig {
+  pacId     Int           @id @default(autoincrement())
+  name      String        @default("Pacotinho")
+  image     String        @default("https://cdn.discordapp.com/attachments/440326168491720705/1086057225262465074/package.png")
+  price     Int           @default(50)
+  desc      String        @default("Alguém soltou uma bomba no bairro e gatinhos mistériosos quais gatos devem ter se escondido aqui?")
+  pacProdEx pac_product[]
+}
+
+model pac_product {
+  pacprodId Int         @id @default(autoincrement())
+  pacotefig pacotefig?  @relation(fields: [PacId], references: [pacId], onDelete: Cascade, onUpdate: Cascade)
+  PacId     Int? @default(1)
+  inv       inventario? @relation(fields: [invId], references: [invId], onDelete: Cascade, onUpdate: Cascade)
+  invId     Int?
+  gatId1 Int @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId2 Int @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId3 Int @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId4 Int @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId5 Int @default(dbgenerated("floor(random() * 20 + 1)"))
 }
 
 model inventario {
-  invId    Int                 @id @default(autoincrement())
-  user     usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
-  userId   Int                 @unique
-  gat_prod gaturinha_product[]
+  invId       Int                 @id @default(autoincrement())
+  user        usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
+  userId      Int                 @unique
+  gat_prod    gaturinha_product[]
+  pac_product pac_product[]
 }
 
 model album {
-  albumId Int @id @default(autoincrement())
+  albumId  Int                 @id @default(autoincrement())
   user     usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
   userId   Int                 @unique
   gat_prod gaturinha_product[]
