@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../Components/Navbar';
 
-export function Settings(){
+export function Cemetery(){
         return (
             <div>
                 <Navbar/>
@@ -9,4 +9,4 @@ export function Settings(){
         );
 }
 
-export default Settings;
+export default Cemetery;
