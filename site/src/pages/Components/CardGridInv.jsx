@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import '../../index.css';
 import Axios from "axios";
-import StickerPackInv from "./StickerPackInv";
+import StickerPackInv from "./StickerPackInv"
 const invId = localStorage.getItem('invId');
 
 const CardGridInv = () => {
