@@ -15,7 +15,7 @@ const stickerPackStore = ({pacId, image ,name, price}) => {
         })
         .then(response => {
           if (response.data === false){ 
-            alert("Você não tem dinheiro suficiente para esse pacote")
+            alert("Você não tem dinheiro suficiente para comprar o pacote de figurinhas")
           }
           else{
             alert("Compra realizada")
@@ -35,9 +35,7 @@ const stickerPackStore = ({pacId, image ,name, price}) => {
             <h3>{name}</h3>
             <p>{price}</p>
             <button onClick={handleBuy}>Buy</button>
-        
         </div>
-
     );
 }
 export default stickerPackStore;

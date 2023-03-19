@@ -1,10 +1,26 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 import axios from "axios";
 import '../../index.css';
-const stickerPackStore = ({pacId, image ,name}) => {
-    const email = localStorage.getItem('email');
-    const handleOpen = () => {}
+const stickerPackStore = ({pacprodId, image ,name}) => {
+    const invId = parseInt(localStorage.getItem('invId'));
+    const handleOpen = () => {
+        
+        axios.post(`http://localhost:3030/openpack/`, {
+          pacprodId: pacprodId,
+          invId: invId
+        })
+        .then(response => {
+            console.log(pacprodId);
+            console.log(invId);
+        alert("Você acabou de abrir o pacote, dê uma olhada nas suas novas figurinhas!")
+        console.log(response.data)
+        window.location.reload();
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Ocorreu um erro ao abrir o pacote");
+        });
+    }
     return(
         <div className="stickerPack">
             <img src={image} alt = {name}/>
@@ -14,5 +30,5 @@ const stickerPackStore = ({pacId, image ,name}) => {
         </div>
 
     );
-}
+}   
 export default stickerPackStore;

@@ -63,15 +63,17 @@ export default {
             where: { invId: Number(invId) },
             include: {
               pac_product: {
-                include: {
+                select:{
+                  pacprodId: true,
                   pacotefig: {
                     select: {
                       pacId: true,
                       name: true,
                       image: true,
                       price: true
+                      }
                     }
-                  }
+                  
                 }
               }
             }
@@ -80,12 +82,38 @@ export default {
           if (!inventario) {
             return res.json({ error: "inventario não encontrado" });
           }
-    
-          const pacotinho = inventario.pac_product.map((pp) => pp.pacotefig);
-    
+          const pacotinho = inventario.pac_product.map((pp) => {
+            return {
+              pacprodId: pp.pacprodId,
+              ...pp.pacotefig
+            };
+          });
           return res.json(pacotinho);
         } catch (error) {
           return res.json({ error });
         }
       },
+      async openPack(req, res) {
+        try {
+          const { pacprodId, invId } = req.body;
+      
+          const pacProd = await prisma.pac_product.findUnique({
+            where: { pacprodId },
+          });
+      
+          const gatIds = [pacProd.gatId1, pacProd.gatId2, pacProd.gatId3, pacProd.gatId4, pacProd.gatId5];
+      
+          const gatProds = await prisma.$transaction(gatIds.map((gatId) => {
+            return prisma.gaturinha_product.create({
+              data: { gatId, invId },
+            });
+          }));
+          await prisma.pac_product.delete({
+            where:{ pacprodId: pacprodId}})
+          return res.json(true);
+        } catch (error) {
+          return res.json({ error });
+        }
+      }
+      
     };

@@ -38,7 +38,7 @@ const CardGridInv = () => {
         <Card gatId={card.gatId} image={card.image} name={card.name} price={card.price} />
       ))}
        {stickerPack && stickerPack.map((pack) => (
-      <StickerPackInv key={pack.pacId} pacId={pack.pacId} image={pack.image} name={pack.name} price={pack.price} />
+      <StickerPackInv key={pack.pacprodId} pacprodId={pack.pacprodId} image={pack.image} name={pack.name} price={pack.price}/>
     ))}
     </div>
   );
