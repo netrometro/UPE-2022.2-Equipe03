@@ -33,10 +33,11 @@
 
   .card-grid {
     position: relative;
-    text-align: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 1rem;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  transition: all 0.3s ease-in-out;
 
   }
   
