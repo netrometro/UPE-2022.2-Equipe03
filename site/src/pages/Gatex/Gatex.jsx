@@ -11,7 +11,6 @@ const Gatex = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [sortOrder, setSortOrder] = useState('Rarity');
     const [sortDirection, setSortDirection] = useState('asc');
-    console.log(sortOrder)
     
   
     useEffect(() => {
