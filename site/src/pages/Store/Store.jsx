@@ -23,11 +23,11 @@ export function Store(){
       }, [userId]);
 
     return(
-        <>
+        <div className='storeContainer'>
     <Navbar/>
-    {user && <p>Gatomoedas: {user.money}</p>}
+    {user && <p className='gatoedas'>Gatoedas: {user.money}</p>}
     <CardGrid/>
-    </>
+    </div>
     );
 }
 

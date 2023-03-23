@@ -12,7 +12,7 @@ const CardGridAlbum = () => {
     Axios
       .get("http://localhost:3030/album/"+userId)
       .then((response) => {
-        setCards(response.data);
+        setCards(response.data.gaturinhas);
         console.log(response)
       })
       .catch((error) => {

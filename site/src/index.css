@@ -33,10 +33,11 @@
 
   .card-grid {
     position: relative;
-    text-align: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 1rem;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  transition: all 0.3s ease-in-out;
 
   }
   
@@ -99,4 +100,64 @@
     margin-bottom: 20px;
     padding: 10px;
     width: 75px;
+  }
+
+  .dailyButton button{
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 6.9px;
+    color: #ffffff;
+    font-family: 'Itim', cursive;
+    background-color: #FF5112;
+    border: none;
+    outline-width: 0;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100px;
+  }
+
+
+  .stickerPack {
+    position: relative;
+    
+  }
+  
+  .stickerPack img {
+    margin: 15px;
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+  }
+  
+  .stickerPack h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .stickerPack p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .stickerPack button {
+    cursor:pointer;
+    position: relative;
+    align-self: center;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px;
+    width: 50%;
+    padding: 0.5rem;
+    background-color: #70B0B0;
+    color: #fff;
+    border: none;
+    outline: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .stickerPack:hover button {
+    opacity: 1;
   }
