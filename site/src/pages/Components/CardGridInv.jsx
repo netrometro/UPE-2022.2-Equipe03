@@ -15,7 +15,6 @@ const CardGridInv = () => {
       .get(`http://localhost:3030/inventario/${invId}`)
       .then((response) => {
         setCards(response.data.reverse());
-        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -25,12 +24,16 @@ const CardGridInv = () => {
       .get(`http://localhost:3030/inventario/Pac/${invId}`)
       .then((response) => {
         setStickerPack(response.data.reverse());
-        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  if (!cards || !stickerPack ||(cards.length === 0 && stickerPack.length === 0)) {
+    return <p className="Alert">Você não tem figurinhas</p>;
+  }
+
 
   return (
     <div className="card-grid">
