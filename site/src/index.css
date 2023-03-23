@@ -161,3 +161,18 @@
   .stickerPack:hover button {
     opacity: 1;
   }
+
+
+
+  .Alert{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'itim', cursive;
+    font-size: large;
+    font-weight: bold;
+    color: #FF5112;
+  }
+  
