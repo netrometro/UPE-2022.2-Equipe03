@@ -5,6 +5,6 @@ import DailyPController from "../controllers/DailyPController";
 const dailyRouter = Router();
 
 dailyRouter.put("/daily/:userId", DailyController.updateMoney);
-dailyRouter.put("/dailyp/:invId", DailyPController.getPackage);
-
+dailyRouter.get("/daily/:userId/lastClickedDate", DailyController.lastClick)
+dailyRouter.put("/daily/:userId/UpdatelastClickedDate", DailyController.updateLastClick)
 export {dailyRouter};

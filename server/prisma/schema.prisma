@@ -23,7 +23,7 @@ model usuario {
   money      Int         @default(0)
   inv        inventario?
   album      album?
-  click      DateTime?
+  click      String?
 }
 
 model gaturinha {

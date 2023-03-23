@@ -26,7 +26,42 @@ export default {
 
       return res.json(usuario);
     } catch {
-      return res.json({ error: "Erro no sistema" });
+      return res.json({ error: error });
     }
   },
+
+  async updateLastClick(req, res){
+    try{
+      const {click} = req.body;
+      const {userId} = req.params;
+      
+      let updateclick = await prisma.usuario.update({
+        where: { userId: Number(userId)
+        }, data: {click}
+      })
+
+      return res.json(true)
+    }catch(error){
+      return res.json({error: false})
+    }
+  },
+  
+  async lastClick(req, res){
+    try{
+      const {userId} = req.params;
+
+      let click = await prisma.usuario.findUnique({
+        where:{
+          userId: Number(userId)
+        }, select: {
+          click: true
+        }
+
+      })
+      return res.json(click)
+    }
+    catch(error){
+      return res.json({error: false})
+    }
+  }
 };

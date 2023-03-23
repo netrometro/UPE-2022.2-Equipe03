@@ -118,6 +118,9 @@
     width: 100px;
   }
 
+  .dailyButton button[disabled] {
+    background-color: #CCCCCC;
+  }
   .dailyPButton button{
     cursor: pointer;
     font-weight: bold;
