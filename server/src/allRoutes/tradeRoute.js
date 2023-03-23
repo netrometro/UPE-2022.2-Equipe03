@@ -3,5 +3,6 @@ import tradeController from "../controllers/tradeController";
 const tradeRouter = Router();
 
 tradeRouter.get("/trade/:invId", tradeController.findRepeated);
-tradeRouter.post("/tradeCards", tradeController.tradeCards);
+tradeRouter.post("/tradeCards", tradeController.tradeCardsRandom);
+tradeRouter.post("/tradeCards/equal", tradeController.tradeCardsEqual)
 export { tradeRouter };

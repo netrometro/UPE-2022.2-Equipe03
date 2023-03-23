@@ -23,7 +23,6 @@ model usuario {
   money      Int         @default(0)
   inv        inventario?
   album      album?
-  click      DateTime?
 }
 
 model gaturinha {
@@ -59,14 +58,14 @@ model pacotefig {
 model pac_product {
   pacprodId Int         @id @default(autoincrement())
   pacotefig pacotefig?  @relation(fields: [PacId], references: [pacId], onDelete: Cascade, onUpdate: Cascade)
-  PacId     Int? @default(1)
+  PacId     Int?        @default(1)
   inv       inventario? @relation(fields: [invId], references: [invId], onDelete: Cascade, onUpdate: Cascade)
   invId     Int?
-  gatId1 Int @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId2 Int @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId3 Int @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId4 Int @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId5 Int @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId1    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId2    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId3    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId4    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId5    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
 }
 
 model inventario {

@@ -19,6 +19,24 @@ const Card = ({amount , image, name, prodIds}) => {
           alert("Ocorreu um erro ao trocar as figurinhas");
         });
       };
+
+      const handleTradeEqual = () => {
+        axios.post(`http://localhost:3030/tradeCards/equal`, {
+         prodIds: prodIds,
+         invId: invId
+        })
+        .then(response => {
+        alert("Suas figurinhas se fundiram e evoluiram! Vá até seu inventário ver que figurinha você ganhou")
+        console.log(response.data);
+        window.location.reload();
+
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Ocorreu um erro ao trocar as figurinhas");
+        });
+      };
+
     return(
         <div className="card">
             
@@ -26,6 +44,7 @@ const Card = ({amount , image, name, prodIds}) => {
             <h3>{name}</h3>
             <p>Duplicate cards : {amount}</p>
             <button onClick={handleTrade}>Trade 5 cards</button>
+            <button onClick={handleTradeEqual}>Upgrade Rarity</button>
         </div>
 
     );
