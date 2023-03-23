@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
 export function PButton(){
 
-
+    const [disabled, setDisabled] = useState(false);
     const CollectPackage = () =>{
         const invId = localStorage.getItem("invId");
         if (!invId){
@@ -13,6 +13,7 @@ export function PButton(){
         .then((response)=> {
             console.log(response);
             alert('cards obtained');
+            setDisabled(true);
 
 
         })
@@ -21,7 +22,7 @@ export function PButton(){
         });
     };
 
-    return (<div className="dailyPButton"><button onClick={CollectPackage}>Collect your daily package</button></div>)
+    return (<div className="dailyPButton"><button disabled={disabled} onClick={CollectPackage}>Collect your daily package</button></div>)
 }
 
 export default PButton;
