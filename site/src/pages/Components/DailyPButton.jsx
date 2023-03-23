@@ -9,7 +9,7 @@ export function PButton(){
         if (!invId){
             return;
         }
-        axios.put('http://localhost:3030/dailyP/' + invId, {pac_product})
+        axios.put('http://localhost:3030/dailyP/' + invId)
         .then((response)=> {
             console.log(response);
             alert('cards obtained');
@@ -23,3 +23,5 @@ export function PButton(){
 
     return (<div className="dailyPButton"><button onClick={CollectPackage}>Collect your daily package</button></div>)
 }
+
+export default PButton;

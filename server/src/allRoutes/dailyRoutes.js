@@ -5,6 +5,6 @@ import DailyPController from "../controllers/DailyPController";
 const dailyRouter = Router();
 
 dailyRouter.put("/daily/:userId", DailyController.updateMoney);
-dailyRouter.put("/daily/invId", DailyPController.getPackage);
+dailyRouter.put("/dailyp/:invId", DailyPController.getPackage);
 
 export {dailyRouter};

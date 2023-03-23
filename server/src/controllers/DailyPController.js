@@ -16,15 +16,28 @@ export default {
             if (!inventario){
             return res.json({ error: "inventário indisponível"});
         }
+        const today = new Date();
+        const lastUpdate = new Date(usuario.lastPackUpdate);
+    
+        if (
+          lastUpdate.getDate() === today.getDate() &&
+          lastUpdate.getMonth() === today.getMonth() &&
+          lastUpdate.getFullYear() === today.getFullYear()
+        ) {
+          return res.json(usuario);
+        }
 
         inventario = await prisma.inventario.update({
             where: { invId: Number(invId)},
-            data: { pac_product: {increment: (pac_product)}},
+            data: { pac_product: {increment: (pac_product)},
+            lastMoneyUpdate: today.toISOString().substring(0, 10), 
+        },
         });
 
         return res.json(inventario);
     }catch{
-        return res.json({ error });
+        console.error(error);
+        return res.status(500).json({ error: "Erro interno do servidor" });
 
         }
     }
