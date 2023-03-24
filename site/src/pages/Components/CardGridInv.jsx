@@ -29,7 +29,7 @@ const CardGridInv = () => {
         console.log(error);
       });
   }, []);
-  if (cards.length === 0) {
+  if (!cards|| !stickerPack || (cards.length === 0 && stickerPack.length === 0)) {
     return <p className="Alert">Você não tem figurinhas</p>;
   }
 
