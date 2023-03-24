@@ -24,6 +24,7 @@ model usuario {
   inv        inventario?
   album      album?
   click      String?
+  clickb     String?
 }
 
 model gaturinha {
@@ -83,10 +84,4 @@ model album {
   userId   Int                 @unique
   gat_prod gaturinha_product[]
 }
-model userDaily {
-  id     Int     @id @default(autoincrement())
-  userId Int
-  date   DateTime
-  packDate DateTime
-  @@unique([userId, date, packDate])
-}
+
