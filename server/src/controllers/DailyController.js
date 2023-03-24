@@ -16,23 +16,12 @@ export default {
       if (!usuario) {
         return res.json({ error: "usuario não encontrado" });
       }
-      const today = new Date();
-    const lastUpdate = new Date(usuario.lastMoneyUpdate);
-
-    if (
-      lastUpdate.getDate() === today.getDate() &&
-      lastUpdate.getMonth() === today.getMonth() &&
-      lastUpdate.getFullYear() === today.getFullYear()
-    ) {
-      return res.json(usuario);
-    }
 
     usuario = await prisma.usuario.update({
       where: { userId: Number(userId) },
       data: {
         money: { increment: Number(money) },
-        lastMoneyUpdate: today.toISOString().substring(0, 10),
-      },
+      }
     });
 
       return res.json(usuario);
