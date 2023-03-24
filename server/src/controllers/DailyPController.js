@@ -27,7 +27,7 @@ export default {
       const npp = await createPacProd(invId);
 
       return res.json(npp);
-    } catch {
+    } catch (error) {
       console.error({ error: "Erro interno do servidor" });
     }
   },
