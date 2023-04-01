@@ -5,9 +5,11 @@ const prisma = new PrismaClient();
 export default {
   async createGaturinha(req, res) {
     try {
-      const { name, image, price, type } = req.body;
+      const { name, image, price, type, desc } = req.body;
 
       let gat = await prisma.gaturinha.findUnique({ where: { image } });
+
+      
 
       if (gat) {
         return res.json({ error: "já existe essa gaturinha" });
@@ -19,6 +21,7 @@ export default {
           image,
           price,
           type,
+          desc
         },
       });
 
