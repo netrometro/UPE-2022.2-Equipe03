@@ -56,23 +56,101 @@ export default {
     }
   },
 
-  // async sellAlbum(req, res) {
-  //   try {
-  //     const { userId } = req.params;
-  //     const album = await prisma.album.findUnique({
-  //       where: { userId: Number(userId) },
-  //     });
+ async sellAlbum(req, res) {
+   try {
+     const { userId } = req.params;
+     const album = await prisma.album.findUnique({
+       where: { userId: Number(userId) }, include: {album: {select: {albumId: true}}}
+      });
 
-  //     if (!album) {
-  //       return res.json({ error: "album não encontrado" });
-  //     }
+     const countGaturinhasAlbum = await prisma.gaturinha_product.count({ where: { albumId: Number(album.albumId)}})
+     const allGatruinhas = await prisma.gaturinha.count()
+     let money = await prisma.usuario.findUnique({where: {userId: Number(userId)}, })
+     const price = 10000
 
-  //     const gaturinhas = album.gat_prod.map((gp) => gp.gat);
-  //     await prisma.album.delete({ where: { albumId: Number(album.albumId) } });
+     if (!album) {
+       return res.json({ error: "album não encontrado" });
+     }
 
-  //     return res.json({ menssage: "album vendido!" });
-  //   } catch (error) {
-  //     return res.json({ error });
-  //   }
-  // },
+     if(countGaturinhasAlbum === 0 ){
+      return res.json({error: "Você não pode vender um album vazio"})
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.10)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.10) },
+        }
+      });
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.20)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.20) },
+        }
+      });
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.30)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.30) },
+        }
+      });
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.40)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.40) },
+        }
+      });
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.50)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.50) },
+        }
+      });
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.60)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.60) },
+        }
+      });
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.70)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.70) },
+        }
+      });
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.80)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.80) },
+        }
+      });
+     } else if (countGaturinhasAlbum <= (allGatruinhas*0.90)){
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price*0.90) },
+        }
+      });
+     } else {
+      money = await prisma.usuario.update({
+        where: { userId: Number(userId) },
+        data: {
+          money: { increment: Number(price) },
+        }
+      });
+     }
+
+     await prisma.album.delete({ where: { albumId: Number(album.albumId) } });
+
+     return res.json({ menssage: "album vendido!" });
+   } catch (error) {
+     return res.json({ error });
+   }
+ },
 };
