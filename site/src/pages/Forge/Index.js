@@ -4,12 +4,28 @@ import { Formik,  Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import React from 'react'
+import PinpointsColumn from '../Components/PinPoints';
+import { useState, useEffect } from 'react';
 export function Forge(){
+  const userId = parseInt(localStorage.getItem('userId'));
+  console.log(userId)
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        axios.get('http://localhost:3030/usuario/'+ userId + '/money')
+          .then(response => {
+            setUser(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, [userId]);
 
     return(
         <div className='container2'>
           <Navbar />
+          {user && <p className='gatoedas'>Gatoedas: {user.money}</p>}
           <div className='container1'>
+          <PinpointsColumn/>
             <Formik
       initialValues={{ name: '', image: '', type: '', description: '' }}
       validationSchema={Yup.object({
@@ -33,18 +49,7 @@ export function Forge(){
         }
         
 
-        const formData = new FormData();
-        formData.append('name', values.name);
-        formData.append('image', values.image);
-        formData.append('type', values.type);
-        formData.append('desc', values.description);
-        formData.append('price', price);
-        console.log(values.name);
-        console.log(values.image);
-        console.log(values.type);
-        console.log(values.description);
-        console.log(price)
-        axios.post("http://localhost:3030/gaturinha", {
+        axios.post("http://localhost:3030/gaturinha/"+userId, {
           name: values.name,
           image: values.image,
           price: price,
@@ -52,7 +57,13 @@ export function Forge(){
           desc: values.description
         })
           .then(response => {
-            console.log(response.data);
+            console.log(response.data)
+            if(response.data === false){
+              alert("Você não tem dinheiro suficiente para criar uma gaturinha")
+            }else{
+              alert("Você criou sua figurinha")
+            }
+            
    
             setSubmitting(false);
           })
@@ -66,7 +77,7 @@ export function Forge(){
       {({ isSubmitting }) => (
         <Form>
           <label htmlFor="name">Name</label>
-          <Field type="text" id="name" name="name" />
+          <Field type="text" id="name" name="name" placeHolder="Gato Exemplo"/>
           <ErrorMessage
                   component="span"
                   name="name"
@@ -74,7 +85,7 @@ export function Forge(){
                   />
 
           <label htmlFor="image">Image</label>
-          <Field type="text" id="image" name="image" />
+          <Field type="text" id="image" name="image" placeHolder="Link da imagem"/>
           <ErrorMessage
                   component="span"
                   name="image"
@@ -101,14 +112,14 @@ export function Forge(){
               />
 
           <label htmlFor="description">Description</label>
-          <Field as="textarea" id="description" name="description" />
+          <Field as="textarea" id="description" name="description" placeHolder="Digite a descrição do seu gato"/>
           <ErrorMessage
                   component="span"
                   name="description"
                   className="form-error"
                   />
 
-          <button type="submit" disabled={isSubmitting}>Submit </button>
+          <button type="submit" disabled={isSubmitting}>Forge</button>
         </Form>
       )}
     </Formik>
