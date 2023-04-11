@@ -3,6 +3,23 @@ import axios from "axios";
 import '../../index.css';
 const stickerPackStore = ({pacprodId, image ,name}) => {
     const invId = parseInt(localStorage.getItem('invId'));
+
+    const handleAllOpen = () => {
+        axios.post(`http://localhost:3030/openMultiplePacks`, {
+            invId: invId
+        })
+        .then(response => {
+            console.log(invId);
+        alert("Você acabou de abrir os pacotes, cuidado com a enxurrada de figurinhas!")
+        console.log(response.data)
+        window.location.reload();
+        })
+        .catch(error => {
+            console.log(error);
+            alert("Ocorreu um erro ao abrir os pacotes");
+          });
+
+    }
     const handleOpen = () => {
         
         axios.post(`http://localhost:3030/openpack/`, {
@@ -14,7 +31,6 @@ const stickerPackStore = ({pacprodId, image ,name}) => {
             console.log(invId);
         alert("Você acabou de abrir o pacote, dê uma olhada nas suas novas figurinhas!")
         console.log(response.data)
-        //alguma alteração relacionada ao reload
         window.location.reload();
         })
         .catch(error => {
@@ -27,7 +43,7 @@ const stickerPackStore = ({pacprodId, image ,name}) => {
             <img src={image} alt = {name}/>
             <h3>{name}</h3>
             <button onClick={handleOpen}>Abrir</button>
-            <button onClick={}>Abrir todos</button>
+            <button onClick={handleAllOpen}>Abrir todos</button>
 
         
         </div>
