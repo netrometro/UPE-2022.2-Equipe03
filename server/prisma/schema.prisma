@@ -63,11 +63,11 @@ model pac_product {
   PacId     Int?        @default(1)
   inv       inventario? @relation(fields: [invId], references: [invId], onDelete: Cascade, onUpdate: Cascade)
   invId     Int?
-  gatId1    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId2    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId3    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId4    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId5    Int         @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId1    Int         
+  gatId2    Int         
+  gatId3    Int         
+  gatId4    Int         
+  gatId5    Int         
 }
 
 model inventario {

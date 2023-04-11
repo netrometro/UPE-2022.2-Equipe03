@@ -16,18 +16,27 @@ export default {
         return res.json({ error: "inventário indisponível" });
       }
 
-      const createPacProd = async (invId) => {
+      const allGaturinhas = await prisma.gaturinha.count();
+
+      let gatIdsArray = [];
+
+      for (let i = 0; i < 5; i++) {
+        gatIdsArray.push(Math.floor(Math.random() * allGaturinhas) + 1);
+      }
+
+      const createPacProd = async (invId, Array) => {
         const pp = await prisma.pac_product.create({
-          data: { invId: Number(invId) },
+          data: { invId, gatId1: Array[0], gatId2: Array[1], gatId3: Array[2], gatId4: Array[3], gatId5: Array[4]},
         });
 
         return pp;
       };
 
-      const npp = await createPacProd(invId);
+      const npp = await createPacProd(Number(invId), gatIdsArray);
 
       return res.json(npp);
     } catch (error) {
+      console.log(error)
       console.error({ error: "Erro interno do servidor" });
     }
   },

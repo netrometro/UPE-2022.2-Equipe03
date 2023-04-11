@@ -1,8 +1,11 @@
 import React, {useState, useEffect}from "react";
 import Axios from "axios";
+import audioFile from "../.././Assets/GatinhoAlimentado.mp3";
 
 export function Button() {
   const [disabled, setDisabled] = useState(false);
+  const [audio] = useState(new Audio(audioFile));
+
   useEffect(() => {
     const userId = parseInt(localStorage.getItem("userId"));
     console.log(userId)
@@ -34,6 +37,7 @@ export function Button() {
     Axios.put(`http://localhost:3030/album/feed/${userId}`)
     .then((response) => {
         if (response.data === true){
+            audio.play();
             alert("Gatinhos Alimentados!");
 
             setDisabled(true);
