@@ -93,6 +93,7 @@ export default {
           return res.json({ error });
         }
       },
+    
       async openPack(req, res) {
         try {
           const { pacprodId, invId } = req.body;
@@ -100,19 +101,59 @@ export default {
           const pacProd = await prisma.pac_product.findUnique({
             where: { pacprodId },
           });
+          
+          const createGatProdFromPac = async (pacProd) =>{
+            const gatIds = [pacProd.gatId1, pacProd.gatId2, pacProd.gatId3, pacProd.gatId4, pacProd.gatId5];
       
-          const gatIds = [pacProd.gatId1, pacProd.gatId2, pacProd.gatId3, pacProd.gatId4, pacProd.gatId5];
-      
-          const gatProds = await prisma.$transaction(gatIds.map((gatId) => {
-            return prisma.gaturinha_product.create({
-              data: { gatId, invId },
-            });
-          }));
+            const gatProds = await prisma.$transaction(gatIds.map((gatId) => {
+              return prisma.gaturinha_product.create({
+                data: { gatId, invId },
+              });
+            }));}
+
+            const newGaturinhas = createGatProdFromPac(pacProd);
+          
           await prisma.pac_product.delete({
             where:{ pacprodId: pacprodId}})
           return res.json(true);
         } catch (error) {
           return res.json({ error });
+        }
+      }
+      ,
+       //adicionar openMultiplePacks separado (funciona melhor como um botão extra), seguindo como um while(enquanto tiver pacote ) ou usando Promise
+      async openMultiplePacks (req,res){
+        try{
+          const {invId} = req.body;
+          console.log(invId)
+
+          const pacprodId = await prisma.inventario.findUnique({
+            where: {invId: Number(invId)}, 
+            include: {pac_product: { 
+              select:{
+              pacprodId: true,}}}
+          })
+          console.log(pacprodId)
+
+          const pacProdIds = [pacprodId];
+          console.log(pacProdIds)
+
+          const packs = await prisma.$transaction(pacProdIds.map(async (pacprodId) =>{
+
+            const pacProd = await prisma.pac_product.findUnique({
+              where: {pacprodId}
+            })
+            const gatIds = [pacProd.gatId1, pacProd.gatId2, pacProd.gatId3, pacProd.gatId4, pacProd.gatId5];
+      
+            const gatProds = await prisma.$transaction(gatIds.map((gatId) => {
+              return prisma.gaturinha_product.create({
+                data: { gatId, invId },
+              });
+            }));}));
+
+          return res.json(pacProd)
+        } catch (error){
+          return res.json(error)
         }
       }
       

@@ -14,6 +14,7 @@ const stickerPackStore = ({pacprodId, image ,name}) => {
             console.log(invId);
         alert("Você acabou de abrir o pacote, dê uma olhada nas suas novas figurinhas!")
         console.log(response.data)
+        //alguma alteração relacionada ao reload
         window.location.reload();
         })
         .catch(error => {
@@ -26,6 +27,8 @@ const stickerPackStore = ({pacprodId, image ,name}) => {
             <img src={image} alt = {name}/>
             <h3>{name}</h3>
             <button onClick={handleOpen}>Abrir</button>
+            <button onClick={}>Abrir todos</button>
+
         
         </div>
 
