@@ -84,4 +84,5 @@ model album {
   userId   Int                 @unique
   gat_prod gaturinha_product[]
   price    Int                 @default(10000)
+  catFed  String?
 }

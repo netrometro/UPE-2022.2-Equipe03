@@ -184,4 +184,131 @@ export default {
       return res.json({ error });
     }
   },
+  async feedCats(req, res) {
+    try {
+      const { userId } = req.params;
+      let album = await prisma.album.findUnique({
+        where: { userId: Number(userId) },
+        select: { albumId: true},
+      });
+      console.log(album);
+
+      if (!album) {
+        return res.json({ error: "album não encontrado" });
+      }
+
+      const countGaturinhasAlbum = await prisma.gaturinha_product.count({
+        where: { albumId: Number(album.albumId) },
+      });
+      const allGaturinhas = await prisma.gaturinha.count();
+
+      const catEnjoyed = async (userId, percent) =>{
+        const price = await prisma.album.update({
+          where: { userId: Number(userId) },
+          data: {
+            price: { increment: (200 * percent) },
+          },
+        });
+
+        return price
+      }
+
+      console.log(countGaturinhasAlbum);
+      console.log(allGaturinhas);
+
+      if (countGaturinhasAlbum === 0) {
+        return res.json({ error: "Não há gatinhos para alimentar" });
+      } else if (countGaturinhasAlbum >= allGaturinhas * 0.9) {
+        const albumEnjoyed = catEnjoyed (userId, 1);
+      } else if (
+        countGaturinhasAlbum >= allGaturinhas * 0.8 &&
+        countGaturinhasAlbum < allGaturinhas * 0.9
+      ) {
+        const albumEnjoyed = catEnjoyed (userId, 0.8);
+      } else if (
+        countGaturinhasAlbum >= allGaturinhas * 0.7 &&
+        countGaturinhasAlbum < allGaturinhas * 0.8
+      ) {
+        const albumEnjoyed = catEnjoyed (userId, 0.7);
+      } else if (
+        countGaturinhasAlbum >= allGaturinhas * 0.6 &&
+        countGaturinhasAlbum < allGaturinhas * 0.7
+      ) {
+        const albumEnjoyed = catEnjoyed (userId, 0.6);
+      } else if (
+        countGaturinhasAlbum >= allGaturinhas * 0.5 &&
+        countGaturinhasAlbum < allGaturinhas * 0.6
+      ) {
+        const albumEnjoyed = catEnjoyed (userId, 0.5);
+      } else if (
+        countGaturinhasAlbum >= allGaturinhas * 0.4 &&
+        countGaturinhasAlbum < allGaturinhas * 0.5
+      ) {
+        const albumEnjoyed = catEnjoyed (userId, 0.4);
+      } else if (
+        countGaturinhasAlbum >= allGaturinhas * 0.3 &&
+        countGaturinhasAlbum < allGaturinhas * 0.4
+      ) {
+        const albumEnjoyed = catEnjoyed (userId, 0.3);
+      } else if (
+        countGaturinhasAlbum >= allGaturinhas * 0.2 &&
+        countGaturinhasAlbum < allGaturinhas * 0.3
+      ) {
+        const albumEnjoyed = catEnjoyed (userId, 0.2);
+      } else if (
+        countGaturinhasAlbum >= allGaturinhas * 0.1 &&
+        countGaturinhasAlbum < allGaturinhas * 0.2
+      ) {
+        const albumEnjoyed = catEnjoyed (userId, 0.1);
+      } else {
+        return res.json(false);
+      }
+
+      album = await prisma.album.findUnique({
+        where: { userId: Number(userId) },
+        select: { albumId: true},
+      });
+
+      console.log(album);
+
+      return res.json(true);
+    } catch (error) {
+      console.log(error);
+      return res.json({ error });
+    }
+  },
+
+  async updateLastClick(req, res) {
+    try {
+      const { catFed } = req.body;
+      const { userId } = req.params;
+
+      let updateclick = await prisma.album.update({
+        where: { userId: Number(userId) },
+        data: { catFed },
+      });
+
+      return res.json(true);
+    } catch (error) {
+      return res.json({ error: false });
+    }
+  },
+
+  async lastClick(req, res) {
+    try {
+      const { userId } = req.params;
+
+      let catfed = await prisma.album.findUnique({
+        where: {
+          userId: Number(userId),
+        },
+        select: {
+          catFed: true,
+        },
+      });
+      return res.json(catfed);
+    } catch (error) {
+      return res.json({ error: false });
+    }
+  },
 };
