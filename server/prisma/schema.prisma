@@ -20,7 +20,7 @@ model usuario {
   name       String?
   created_at DateTime    @default(now())
   password   String
-  money      Int         @default(0)
+  money      Int         @default(100)
   inv        inventario?
   album      album?
   click      String?
@@ -60,14 +60,14 @@ model pacotefig {
 model pac_product {
   pacprodId Int         @id @default(autoincrement())
   pacotefig pacotefig?  @relation(fields: [PacId], references: [pacId], onDelete: Cascade, onUpdate: Cascade)
-  PacId     Int? @default(1)
+  PacId     Int?        @default(1)
   inv       inventario? @relation(fields: [invId], references: [invId], onDelete: Cascade, onUpdate: Cascade)
   invId     Int?
-  gatId1 Int @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId2 Int @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId3 Int @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId4 Int @default(dbgenerated("floor(random() * 20 + 1)"))
-  gatId5 Int @default(dbgenerated("floor(random() * 20 + 1)"))
+  gatId1    Int         
+  gatId2    Int         
+  gatId3    Int         
+  gatId4    Int         
+  gatId5    Int         
 }
 
 model inventario {
@@ -83,5 +83,6 @@ model album {
   user     usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
   userId   Int                 @unique
   gat_prod gaturinha_product[]
+  price    Int                 @default(10000)
+  catFed  String?
 }
-

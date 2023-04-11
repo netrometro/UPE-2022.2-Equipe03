@@ -9,9 +9,8 @@ import Card from '../Components/CardGatex'
 const Gatex = () => {
     const [cards, setCards] = useState([]);
     const [searchTerm, setSearchTerm] = useState('')
-    const [sortOrder, setSortOrder] = useState('name');
+    const [sortOrder, setSortOrder] = useState('Rarity');
     const [sortDirection, setSortDirection] = useState('asc');
-
     
   
     useEffect(() => {
@@ -55,9 +54,9 @@ const Gatex = () => {
             <label>
               Sort by:
               <select value={sortOrder} onChange={event => setSortOrder(event.target.value)}>
-                            <option value="Rarity">Rarity</option>
-                            <option value="name">Name</option>
-                        </select>
+                              <option value="Rarity">Rarity</option>
+                              <option value="name">Name</option>
+              </select>
                     </label>
                     <label>
                         <input type="checkbox" checked={sortDirection === 'desc'} onChange={event => setSortDirection(event.target.checked ? 'desc' : 'asc')} />

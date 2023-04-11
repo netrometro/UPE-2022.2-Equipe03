@@ -12,9 +12,8 @@ export function Button() {
     Axios.get(`http://localhost:3030/dailyP/${userId}/lastClickedDate`)
       .then((response) => {
         const lastClickedDate = response.data.clickb;
-        console.log(response.data.clickb)
+        console.log(lastClickedDate)
         const today = new Date().toISOString().slice(0, 10);
-        console.log(today);
 
         if (!lastClickedDate || (lastClickedDate !== today)) {
           setDisabled(false);

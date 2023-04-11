@@ -29,6 +29,9 @@ const CardGridInv = () => {
         console.log(error);
       });
   }, []);
+  if (!cards|| !stickerPack || (cards.length === 0 && stickerPack.length === 0)) {
+    return <p className="Alert">Você não tem figurinhas</p>;
+  }
 
   if (!cards || !stickerPack ||(cards.length === 0 && stickerPack.length === 0)) {
     return <p className="Alert">Você não tem figurinhas</p>;

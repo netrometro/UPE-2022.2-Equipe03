@@ -19,7 +19,8 @@ export const Navbar = () => {
                             <li class="nav-item"><Link to='/inventory'>Inventory</Link></li>
                             <li class="nav-item"><Link to='/album'>Album</Link></li>
                             <li class="nav-item"><Link to='/trade'>Trade</Link></li>
-                            <li class="nav-item"><Link to='/cemitery'>Cemetery</Link></li>
+                            <li class="nav-item"><Link to='/cemetery'>Cemetery</Link></li>
+                            <li class="nav-item"><Link to='/forge'>Forge</Link></li>
                             <li class="nav-item"><Logout/></li>
                             
                     </ul>

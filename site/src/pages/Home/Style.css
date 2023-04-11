@@ -1,0 +1,15 @@
+.imagem img{
+    transform: scale(0.5);
+}
+.imagem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+}
+.botoes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
