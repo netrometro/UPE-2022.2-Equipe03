@@ -20,7 +20,7 @@ model usuario {
   name       String?
   created_at DateTime    @default(now())
   password   String
-  money      Int         @default(0)
+  money      Int         @default(100)
   inv        inventario?
   album      album?
   click      String?
@@ -83,5 +83,5 @@ model album {
   user     usuario             @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
   userId   Int                 @unique
   gat_prod gaturinha_product[]
+  price    Int                 @default(10000)
 }
-
