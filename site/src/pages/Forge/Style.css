@@ -1,0 +1,42 @@
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+
+  .container1 form{
+    display: grid;
+    font-family: 'Itim', cursive;    
+    color: #FF5112;
+    font-weight: bold;
+  }
+
+
+.form-error{ 
+    color: red;
+}
+
+.container2 form input[type="text"],
+.container2 form select {
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+.container2 form textarea {
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  resize: none;
+}
+
+.container2 button{
+    border-radius: 50px;
+    border: none;
+    background-color: #FF5112;
+    font-family:'Itim', cursive;
+    font-weight: bold;
+    color: white;
+    height: 40px;
+    margin-top: 20px;
+}

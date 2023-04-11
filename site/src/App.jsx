@@ -9,6 +9,7 @@ import Trade from './pages/Trade/Trade'
 import Cemetery from './pages/Cemetery/cemetery';
 import Gatex from  './pages/Gatex/Gatex'
 import Album from './pages/Album/Album';
+import Forge from './pages/Forge/Index';
 function App() {
   return (
     
@@ -21,6 +22,7 @@ function App() {
       <Route path='/trade' element={<Trade/>}></Route>
       <Route path='/cemetery' element={<Cemetery/>}></Route>
       <Route path='/gatex' element={<Gatex/>}></Route>
+      <Route path='/forge' element={<Forge/>}></Route>
      
     
     </Routes>
