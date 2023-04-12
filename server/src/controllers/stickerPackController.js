@@ -136,41 +136,54 @@ export default {
       return res.json({ error });
     }
   },
-  async openMultiplePacks (req,res) {
-    try{
-      const {invId} = req.body;
-      console.log(invId)
-
-      const pacprodId = await prisma.inventario.findUnique({
-        where: {invId: Number(invId)}, 
-        include: {pac_product: { 
-          select:{
-          pacprodId: true,}}}
-      })
-      console.log(pacprodId)
-
-      const pacProdIds = [pacprodId];
-      console.log(pacProdIds)
-
-      const packs = await prisma.$transaction(pacProdIds.map(async (pacprodId) =>{
-
-        const pacProd = await prisma.pac_product.findUnique({
-          where: {pacprodId}
-        })
-        const gatIds = [pacProd.gatId1, pacProd.gatId2, pacProd.gatId3, pacProd.gatId4, pacProd.gatId5];
+  async openMultiplePacks(req, res) {
+    try {
+      const { invId } = req.body;
   
-        const gatProds = await prisma.$transaction(gatIds.map((gatId) => {
-          return prisma.gaturinha_product.create({
-            data: { gatId, invId },
+      const inv = await prisma.inventario.findUnique({
+        where: { invId: Number(invId) },
+      });
+      if (!inv) {
+        return res.status(404).json({ error: "inventario não encontrado" });
+      }
+  
+      const pacProdIds = inv.pac_product.map((pp) => pp.pacprodId);
+  
+      const packs = await prisma.$transaction(
+        pacProdIds.map(async (pacprodId) => {
+          const pacProd = await prisma.pac_product.findUnique({
+            where: { pacprodId },
           });
-        }));}));
-
-      return res.json(pacprodId)
-    } catch (error){
-      console.log(error)
-      return res.json(error)
+          const gatIds = [
+            pacProd.gatId1,
+            pacProd.gatId2,
+            pacProd.gatId3,
+            pacProd.gatId4,
+            pacProd.gatId5,
+          ];
+  
+          const gatProds = await prisma.$transaction(
+            gatIds.map((gatId) => {
+              return prisma.gaturinha_product.create({
+                data: { gatId, invId },
+              });
+            })
+          );
+  
+          await prisma.pac_product.delete({
+            where: { pacprodId },
+          });
+  
+          return true;
+        })
+      );
+  
+      return res.json(packs);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro interno do servidor" });
     }
-  }
+  },
 };
 
 
