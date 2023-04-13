@@ -32,10 +32,10 @@ export default {
             include: {
               gat: {
                 select: {
-                  gatId: true,
                   name: true,
                   image: true,
-                  price: true,
+                  type: true,
+                  desc: true,
                 },
               },
             },
@@ -311,4 +311,28 @@ export default {
       return res.json({ error: false });
     }
   },
+
+  async stick (req, res) {
+    try {
+      const {userId} = req.params;
+      const {prodId} = req.body;
+
+      const albumid = await prisma.album.findUnique({
+        where: { userId: Number(userId)}
+      })
+
+      const gaturinha = await prisma.gaturinha_product.update({
+        where: {prodId: Number(prodId)},
+        data: {
+          invId: null,
+          albumId: albumid.albumId
+        }
+      })
+
+      return res.json(true)
+    } catch (error) {
+      console.log(error)
+      return res.json(false)
+    }
+  }
 };

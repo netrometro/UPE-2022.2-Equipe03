@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Card from "./Card";
+import Card from "./CardInv";
 import '../../index.css';
 import Axios from "axios";
 import StickerPackInv from "./StickerPackInv"
@@ -14,6 +14,7 @@ const CardGridInv = () => {
     Axios
       .get(`http://localhost:3030/inventario/${invId}`)
       .then((response) => {
+        console.log(response)
         setCards(response.data.reverse());
       })
       .catch((error) => {
@@ -44,7 +45,7 @@ const CardGridInv = () => {
       <StickerPackInv key={pack.pacprodId} pacprodId={pack.pacprodId} image={pack.image} name={pack.name} price={pack.price}/>
     ))}
       {Array.isArray(cards) && cards.map((card) => (
-        <Card gatId={card.gatId} image={card.image} name={card.name} price={card.price} />
+        <Card prodId={card.prodId} image={card.image} name={card.name} />
       ))}
     </div>
   );

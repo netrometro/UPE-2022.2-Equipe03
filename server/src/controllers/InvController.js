@@ -11,13 +11,12 @@ export default {
         where: { invId: Number(invId) },
         include: {
           gat_prod: {
-            include: {
+            select: {
+              prodId: true,
               gat: {
                 select: {
-                  gatId: true,
                   name: true,
                   image: true,
-                  price: true
                 }
               }
             }
@@ -29,7 +28,12 @@ export default {
         return res.json({ error: "inventario não encontrado" });
       }
 
-      const gaturinhas = inventario.gat_prod.map((gp) => gp.gat);
+      const gaturinhas = inventario.gat_prod.map((gp) => {
+        return {
+          prodId: gp.prodId,
+          ...gp.gat,
+        };
+      });
 
       return res.json(gaturinhas);
     } catch (error) {

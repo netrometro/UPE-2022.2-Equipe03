@@ -6,10 +6,12 @@ import axios from 'axios';
 import React from 'react'
 import PinpointsColumn from '../Components/PinPoints';
 import { useState, useEffect } from 'react';
+import audioFile from "../.././Assets/ForjaGato.mp3";
 export function Forge(){
   const userId = parseInt(localStorage.getItem('userId'));
   console.log(userId)
     const [user, setUser] = useState(null);
+    const [audio] = useState(new Audio(audioFile));
     useEffect(() => {
         axios.get('http://localhost:3030/usuario/'+ userId + '/money')
           .then(response => {
@@ -61,6 +63,7 @@ export function Forge(){
             if(response.data === false){
               alert("Você não tem dinheiro suficiente para criar uma gaturinha")
             }else{
+              audio.play();
               alert("Você criou sua figurinha")
             }
             

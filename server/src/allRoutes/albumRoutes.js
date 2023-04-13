@@ -10,5 +10,6 @@ albumRouter.post("/album/sell", AlbumController.sellAlbum);
 albumRouter.put("/album/feed/:userId", AlbumController.feedCats)
 albumRouter.get("/album/:userId/lastClickedDate", AlbumController.lastClick)
 albumRouter.put("/album/:userId/UpdatelastClickedDate", AlbumController.updateLastClick)
+albumRouter.put("/album/stick/:userId", AlbumController.stick)
 
 export { albumRouter };
