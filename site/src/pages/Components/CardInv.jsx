@@ -28,12 +28,39 @@ const Card = ({prodId, image, name}) => {
           alert("Ocorreu um erro ao realizar a colagem");
         });
       };
+
+      const vender = () => {
+        if (!userId) {
+            alert('Você deve estar logado para vender');
+            Navigate('/')
+          }
+        axios.post(`http://localhost:3030/inventario/sell/${userId}`, {
+          prodId: prodId,
+        })
+        .then(response => {
+          if (response.data === false){ 
+            alert("Não foi possível vender a figurinha")
+          }
+          else{
+            alert("Vendida!")
+          }
+          console.log(response.data)
+          window.location.reload();
+          
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Ocorreu um erro ao vender.");
+        });
+      }; 
+
     return(
         <div className="card">
             
             <img src={image} alt = {name}/>
             <h3>{name}</h3>
             <button onClick={colar}>Stick</button>
+            <button onClick={vender}>Sell</button>
         </div>
 
     );
