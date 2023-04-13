@@ -136,24 +136,16 @@ export default {
       return res.json({ error });
     }
   },
-  async openMultiplePacks(req, res) {
+  async openAllPacks(req, res) {
     try {
       const { invId } = req.body;
   
-      const inv = await prisma.inventario.findUnique({
-        where: { invId: Number(invId) },
+      const pacProds = await prisma.pac_product.findMany({
+        where: { invId },
       });
-      if (!inv) {
-        return res.status(404).json({ error: "inventario não encontrado" });
-      }
   
-      const pacProdIds = inv.pac_product.map((pp) => pp.pacprodId);
-  
-      const packs = await prisma.$transaction(
-        pacProdIds.map(async (pacprodId) => {
-          const pacProd = await prisma.pac_product.findUnique({
-            where: { pacprodId },
-          });
+      const results = await Promise.all(
+        pacProds.map(async (pacProd) => {
           const gatIds = [
             pacProd.gatId1,
             pacProd.gatId2,
@@ -171,19 +163,18 @@ export default {
           );
   
           await prisma.pac_product.delete({
-            where: { pacprodId },
+            where: { pacprodId: pacProd.pacprodId },
           });
   
           return true;
         })
       );
   
-      return res.json(packs);
+      res.json(results);
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
-  },
-};
+  }};
 
 

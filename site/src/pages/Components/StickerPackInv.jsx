@@ -5,7 +5,7 @@ const stickerPackStore = ({pacprodId, image ,name}) => {
     const invId = parseInt(localStorage.getItem('invId'));
 
     const handleAllOpen = () => {
-        axios.post(`http://localhost:3030/openMultiplePacks`, {
+        axios.post(`http://localhost:3030/openAllPacks`, {
             invId: invId
         })
         .then(response => {
