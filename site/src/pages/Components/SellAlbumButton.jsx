@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "../../index.css";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import audioFile from "../.././Assets/GatoMortoEstourado.mp3";
+import audioFile from "../.././Assets/GatoVendido.mp3";
 
 export function SellAlbumButton() {
   const [audio] = useState(new Audio(audioFile));
