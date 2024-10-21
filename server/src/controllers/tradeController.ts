@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default {
-  async findRepeated(req, res) {
+  async findRepeated(req: any, res: any) {
     try {
       const { invId } = req.params;
 
@@ -30,14 +30,15 @@ export default {
       }
 
       const gaturinhasGrouped = inventario.gat_prod
-        ? inventario.gat_prod.reduce((acc, gp) => {
+        ? inventario.gat_prod.reduce((acc: { gatId: number; name: string; image: string; price: number; amount: number; prodIds: number[]; }[], gp) => {
             const { gatId, gat } = gp;
             const index = acc.findIndex((item) => item.gatId === gatId);
             if (index !== -1) {
               acc[index].amount++;
               acc[index].prodIds.push(gp.prodId);
             } else {
-              acc.push({ amount: 1, gatId, prodIds: [gp.prodId], ...gat });
+              const { gatId, ...gatWithoutId } = gat;
+              acc.push({ amount: 1, gatId, prodIds: [gp.prodId], ...gatWithoutId });
             }
             return acc;
           }, [])
@@ -52,7 +53,7 @@ export default {
       return res.json({ error });
     }
   },
-  async tradeCardsRandom(req, res) {
+  async tradeCardsRandom(req: any, res: any) {
     try {
       const { prodIds, invId } = req.body;
 
@@ -66,7 +67,7 @@ export default {
         },
       });
 
-      const createGatProd = async (invId) => {
+      const createGatProd = async (invId: any) => {
         const gatIds = await prisma.gaturinha.findMany({
           select: { gatId: true },
         });
@@ -86,7 +87,7 @@ export default {
     }
   },
 
-  async tradeCardsEqual(req, res) {
+  async tradeCardsEqual(req: any, res: any) {
     try {
       const { prodIds, invId } = req.body;
 
@@ -112,10 +113,14 @@ export default {
         },
       });
 
-      const createGatProd = async (invId) => {
+      const createGatProd = async (invId: any) => {
         let newType = '';
 
-        if(rarity.gat.type ===  'Common'){
+        if (!rarity) {
+          return res.json({ error: "Raridade não encontrada" });
+        }
+
+        if (rarity.gat.type === 'Common') {
           newType = 'Rare';
         } else if (rarity.gat.type === 'Rare') {
           newType = 'Epic';

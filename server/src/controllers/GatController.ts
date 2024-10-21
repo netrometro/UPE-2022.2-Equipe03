@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default {
-  async createGaturinha(req, res) {
+  async createGaturinha(req: any, res: any) {
     try {
       const { userId } = req.params;
       const { name, image, price, type, desc } = req.body;
@@ -55,7 +55,7 @@ export default {
     }
   },
 
-  async createCompra(req, res) {
+  async createCompra(req: any, res: any) {
     try {
       const { gatId, email } = req.body;
 
@@ -69,11 +69,11 @@ export default {
       });
       let usuario = await prisma.usuario.findUnique({ where: { email } });
 
-      if (value.price > usuario.money) {
+      if (!usuario || !value || value.price > usuario.money) {
         return res.json(false);
       }
 
-      const createGatProd = async (gatId, invId) => {
+      const createGatProd = async (gatId: any, invId: any) => {
         const gp = await prisma.gaturinha_product.create({
           data: { gatId, invId },
         });
@@ -81,10 +81,17 @@ export default {
         return gp;
       };
 
+      if (!invent) {
+        return res.json({ error: "Inventário não encontrado" });
+      }
+
       const invt = await prisma.inventario.findUnique({
         where: { userId: invent.userId },
       });
 
+      if (!invt) {
+        return res.json({ error: "Inventário não encontrado" });
+      }
       const ngp = await createGatProd(gatId, invt.invId);
       const newMoney = usuario.money - value.price;
 

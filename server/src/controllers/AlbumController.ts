@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default {
-  async createAlbum(req, res) {
+  async createAlbum(req: any, res: any) {
     try {
       const { userId } = req.body;
       let album = await prisma.album.findUnique({
@@ -21,7 +21,7 @@ export default {
       return res.json({ error });
     }
   },
-  async findAlbum(req, res) {
+  async findAlbum(req: any, res: any) {
     try {
       const { userId } = req.params;
 
@@ -55,7 +55,7 @@ export default {
     }
   },
 
-  async sellAlbum(req, res) {
+  async sellAlbum(req: any, res: any) {
     try {
       const { userId } = req.body;
       const album = await prisma.album.findUnique({
@@ -184,7 +184,7 @@ export default {
       return res.json({ error });
     }
   },
-  async feedCats(req, res) {
+  async feedCats(req: any, res: any) {
     try {
       const { userId } = req.params;
       let album = await prisma.album.findUnique({
@@ -202,7 +202,7 @@ export default {
       });
       const allGaturinhas = await prisma.gaturinha.count();
 
-      const catEnjoyed = async (userId, percent) =>{
+      const catEnjoyed = async (userId: any, percent: any) =>{
         const price = await prisma.album.update({
           where: { userId: Number(userId) },
           data: {
@@ -278,7 +278,7 @@ export default {
     }
   },
 
-  async updateLastClick(req, res) {
+  async updateLastClick(req: any, res: any) {
     try {
       const { catFed } = req.body;
       const { userId } = req.params;
@@ -294,7 +294,7 @@ export default {
     }
   },
 
-  async lastClick(req, res) {
+  async lastClick(req: any, res: any) {
     try {
       const { userId } = req.params;
 
@@ -312,7 +312,7 @@ export default {
     }
   },
 
-  async stick (req, res) {
+  async stick (req: any, res: any) {
     try {
       const {userId} = req.params;
       const {prodId} = req.body;
@@ -321,13 +321,17 @@ export default {
         where: { userId: Number(userId)}
       })
 
+      if (!albumid) {
+        return res.json({ error: "album não encontrado" });
+      }
+
       const gaturinha = await prisma.gaturinha_product.update({
-        where: {prodId: Number(prodId)},
+        where: { prodId: Number(prodId) },
         data: {
           invId: null,
-          albumId: albumid.albumId
-        }
-      })
+          albumId: albumid.albumId,
+        },
+      });
 
       return res.json(true)
     } catch (error) {
