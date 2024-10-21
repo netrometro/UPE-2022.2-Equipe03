@@ -72,21 +72,21 @@ export function Login() {
   return (
     <div className="container">
       <div className="login-logo"> <img
-                    src="https://imgur.com/9yUB4Sx"
+                    src="https://i.imgur.com/Uk3iJSv.png" //Logo
                     alt = "Login App"/>
                     </div>
       <div className='loginImage'>
         <div className='loginregister'>
         <div className='login'>
         <img
-         src="https://imgur.com/ZwfZQXs"
+         src="https://i.imgur.com/QaKgyGu.png" //Login
          alt="gaturinhas"
            
         />
         </div>
         <div className='register'>
         <img 
-        src='https://imgur.com/zFvrczN'
+        src='https://i.imgur.com/mk87zSp.png' //cadastre-se
         alt ="register"/>
       </div>
       </div>
