@@ -317,12 +317,34 @@ export default {
       const {userId} = req.params;
       const {prodId} = req.body;
 
+      const gatProd = await prisma.gaturinha_product.findUnique({
+        where: { prodId: Number(prodId) },  // Procurar pelo prodId
+        select: { gatId: true },  // Seleciona apenas o gatId
+      });
+      
+      if (!gatProd) {
+        return res.json({ error: "Produto não encontrado" });
+      }
+      
+      const { gatId } = gatProd;
+
       const albumid = await prisma.album.findUnique({
         where: { userId: Number(userId)}
       })
 
       if (!albumid) {
         return res.json({ error: "album não encontrado" });
+      }
+
+      const gaturinhaAlbum = await prisma.gaturinha_product.findFirst({
+        where: {
+          gatId: Number(gatId),
+          albumId: albumid.albumId,
+        },
+      });
+  
+      if (gaturinhaAlbum) {
+        return res.json({ error: "Você já colou uma figurinha igual!" });
       }
 
       const gaturinha = await prisma.gaturinha_product.update({
