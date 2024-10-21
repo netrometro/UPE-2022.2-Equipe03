@@ -1,4 +1,4 @@
-const GATINHOS = [{
+export const GATINHOS = [{
     name: "Gatinho Misericordioso",
     image: "https://imgur.com/GfO7aGe",
     price: 500,
@@ -20,7 +20,7 @@ const GATINHOS = [{
     name: "Gatonista",
     image: "https://imgur.com/y6Zc2xV",
     price: 200,
-    type: "Raro",
+    type: "Rare",
     desc: "COMUNISTA!! O Gatonista adora jogar xadrez e ler livros complexos."
 },{
     name: "Gatoringa",

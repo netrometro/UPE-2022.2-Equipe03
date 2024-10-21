@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { GATINHOS } from './Gatinhos';
 
 const prisma = new PrismaClient();
 //para rodar -> npm run seed
