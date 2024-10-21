@@ -69,7 +69,7 @@ export default {
   async login(req, res) {
     try {
       const { email, password } = req.body;
-
+      console.log(email, password)
       const usuario = await prisma.usuario.findUnique({ where: { email } });
       const invId = await prisma.inventario.findUnique({where: { userId: usuario.userId} })
 
@@ -90,7 +90,8 @@ export default {
 
       res.json({ result: comparaSenha, email: email, userId: usuario.userId, invId: invId.invId});
     } catch (error) {
-      return res.json({ error: "Usuário não encontrado" });
+      console.log(error)
+      return res.json({ error: "Usuário não encontrado"});
     }
   },
 
