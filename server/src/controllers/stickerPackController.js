@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default {
-  async createCompraPac(req: any, res: any) {
+  async createCompraPac(req, res) {
     try {
       const { email } = req.body;
 
@@ -17,7 +17,7 @@ export default {
       });
       let usuario = await prisma.usuario.findUnique({ where: { email } });
 
-      if (!value || !usuario || value.price > usuario.money) {
+      if (value.price > usuario.money) {
         return res.json(false);
       }
 
@@ -29,7 +29,7 @@ export default {
         gatIdsArray.push(Math.floor(Math.random() * allGaturinhas) + 1);
       }
 
-      const createPacProd = async (invId: any, Array: any) => {
+      const createPacProd = async (invId, Array) => {
         const pp = await prisma.pac_product.create({
           data: { invId, gatId1: Array[0], gatId2: Array[1], gatId3: Array[2], gatId4: Array[3], gatId5: Array[4]},
         });
@@ -37,17 +37,9 @@ export default {
         return pp;
       };
 
-      if (!userId) {
-        return res.status(404).json({ error: "Usuário não encontrado" });
-      }
-
       const invt = await prisma.inventario.findUnique({
         where: { userId: userId.userId },
       });
-
-      if (!invt) {
-        return res.status(404).json({ error: "Inventário não encontrado" });
-      }
 
       const npp = await createPacProd(invt.invId, gatIdsArray);
       const newMoney = usuario.money - value.price;
@@ -63,7 +55,7 @@ export default {
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
   },
-  async findAllpackages(req: any, res: any) {
+  async findAllpackages(req, res) {
     try {
       const packages = await prisma.pacotefig.findMany();
       return res.json(packages);
@@ -71,7 +63,7 @@ export default {
       return res.json({ error });
     }
   },
-  async findInv(req: any, res: any) {
+  async findInv(req, res) {
     try {
       const { invId } = req.params;
 
@@ -109,34 +101,30 @@ export default {
     }
   },
     
-  async openPack(req: any, res: any) {
+  async openPack(req, res) {
     try {
       const { pacprodId, invId } = req.body;
 
       const pacProd = await prisma.pac_product.findUnique({
         where: { pacprodId },
       });
-
-      if (!pacProd) {
-        return res.json({ error: "Pacote não encontrado" });
-      }
     
-      const createGatProdFromPac = async (pacProd: any) =>{
+          const createGatProdFromPac = async (pacProd) =>{
         const gatIds = [
         pacProd.gatId1,
         pacProd.gatId2,
         pacProd.gatId3,
         pacProd.gatId4,
         pacProd.gatId5,
-        ];
+      ];
 
         const gatProds = await prisma.$transaction(
         gatIds.map((gatId) => {
             return prisma.gaturinha_product.create({
               data: { gatId, invId },
             });
-          }));
-      }
+          })
+      );}
 
             const newGaturinhas = createGatProdFromPac(pacProd);
           
@@ -148,7 +136,7 @@ export default {
       return res.json({ error });
     }
   },
-  async openAllPacks(req: any, res: any) {
+  async openAllPacks(req, res) {
     try {
       const { invId } = req.body;
   

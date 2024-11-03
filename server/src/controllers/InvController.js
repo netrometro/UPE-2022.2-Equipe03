@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default {
-  async findInv(req: any, res: any) {
+  async findInv(req, res) {
     try {
       const { invId } = req.params;
 

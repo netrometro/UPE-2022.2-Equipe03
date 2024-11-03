@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export default {
   //função de adicionar pacote de cartas ao inventário
-  async getPackage(req: any, res: any) {
+  async getPackage(req, res) {
     try {
       const { invId } = req.params;
 
@@ -24,7 +24,7 @@ export default {
         gatIdsArray.push(Math.floor(Math.random() * allGaturinhas) + 1);
       }
 
-      const createPacProd = async (invId: any, Array: any) => {
+      const createPacProd = async (invId, Array) => {
         const pp = await prisma.pac_product.create({
           data: { invId, gatId1: Array[0], gatId2: Array[1], gatId3: Array[2], gatId4: Array[3], gatId5: Array[4]},
         });
@@ -41,7 +41,7 @@ export default {
     }
   },
 
-  async updateLastClick(req: any, res: any) {
+  async updateLastClick(req, res) {
     try {
       const { clickb } = req.body;
       const { userId } = req.params;
@@ -57,7 +57,7 @@ export default {
     }
   },
 
-  async lastClick(req: any, res: any) {
+  async lastClick(req, res) {
     try {
       const { userId } = req.params;
 
