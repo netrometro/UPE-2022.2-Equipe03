@@ -22,7 +22,7 @@
   header {
     display: flex;
     align-items: top;
-    font-family: 'itim', cursive;
+    font-family: 'Itim', cursive;
     padding: 20px 50px;
     justify-content: space-between;
     background-size:cover;
@@ -55,11 +55,13 @@
   
   .card h3 {
     margin: 0;
+    font-family: 'Itim', cursive;
     font-size: 1.2rem;
   }
   
   .card p {
     margin: 0;
+    font-family: 'Itim', cursive;
     font-size: 1rem;
   }
   
@@ -88,6 +90,7 @@
   .button2{
     cursor: pointer;
     font-weight: bold;
+    font-family: 'Itim', cursive;
     margin-left: 6.9px;
     color: #ffffff;
     font-family: 'Itim', cursive;
@@ -192,7 +195,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: 'itim', cursive;
+    font-family: 'Itim', cursive;
     font-size: large;
     font-weight: bold;
     color: #FF5112;
