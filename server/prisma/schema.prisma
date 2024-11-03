@@ -51,9 +51,9 @@ model gaturinha_product {
 model pacotefig {
   pacId     Int           @id @default(autoincrement())
   name      String        @default("Pacotinho")
-  image     String        @default("https://cdn.discordapp.com/attachments/440326168491720705/1086332398205153421/pacote.png")
+  image     String        @default("https://i.imgur.com/GJGafhC.png")
   price     Int           @default(50)
-  desc      String        @default("Alguém soltou uma bomba no bairro e gatinhos mistériosos quais gatos devem ter se escondido aqui?")
+  desc      String        @default("Alguém soltou uma bomba no bairro! Quais gatinhos mistériosos devem ter se escondido aqui?")
   pacProdEx pac_product[]
 }
 
