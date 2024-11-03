@@ -7,7 +7,7 @@ export const Navbar = () => {
     return (
         <header>
         <div className="logo">
-            <img src="https://i.imgur.com/Uk3iJSv.png" alt="Gaturinhas" draggable="false"></img>
+            <img src="https://media.discordapp.net/attachments/1081023068358590586/1081023228631318579/nome-removebg-preview.png" alt="Gaturinhas" draggable="false"></img>
         </div>
         <div class="topbar">
             <nav class="navbar">
